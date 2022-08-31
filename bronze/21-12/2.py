@@ -1,3 +1,6 @@
+# 问题转化
+# 差分数组
+
 n = int(input())
 
 target = list(map(int, input().split(" ")))
@@ -14,4 +17,3 @@ for i in range(1, len(diff)):
     sum += max(diff[i] - diff[i-1], 0)
 
 print(sum)
-
