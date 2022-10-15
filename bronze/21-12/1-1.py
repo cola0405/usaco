@@ -8,7 +8,7 @@ ans = 0
 left = [0]*n
 right = [0]*n
 
-
+# 构造left
 c = 1
 for i in range(1, n):
     # 相同则没办法作throw photo
@@ -20,6 +20,7 @@ for i in range(1, n):
         left[i] = c
         c = 1
 
+# 构造right
 c = 1
 for i in range(n-2, 0, -1):
     if s[i] == s[i+1]:
