@@ -16,7 +16,7 @@ yellow = 0
 
 d = {}
 for i in range(len(ans)):
-    g[ans[i]] = 0
+    d[ans[i]] = 0
     if ans[i] in interact:
         if ans[i] in d.keys():
             d[ans[i]] += 1
