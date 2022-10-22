@@ -1,3 +1,4 @@
+# sim
 import sys
 
 sys.stdin = open('breedflip.in', 'r')
@@ -9,14 +10,13 @@ B = input()
 
 ans = 0
 i = 0
-flip = False
 while i < n:
+    flip = False
     while A[i] != B[i]:
-        flip = True
         i += 1
-    i += 1
+        flip = True
     if flip:
         ans += 1
-        flip = False
+    i += 1
 
 print(ans)

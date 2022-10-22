@@ -1,6 +1,6 @@
+# Daisy Chains
 # 模拟
 # 前缀和
-# 01错位
 
 
 ans = int(input())
@@ -15,7 +15,7 @@ for i in range(1, len(pre_sum)):
     for j in range(i+1, len(pre_sum)):
         ij_sum = pre_sum[j] - pre_sum[i-1]
         average = ij_sum // (j - i + 1)
-        if ij_sum%(j-i+1) == 0 and average in lst[i-1:j]:
+        if ij_sum % (j-i+1) == 0 and average in lst[i-1:j]:
             ans += 1
 
 print(ans)

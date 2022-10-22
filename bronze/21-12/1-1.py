@@ -1,5 +1,6 @@
 # 有些if条件是你试不出来的
 
+
 n = int(input())
 s = list(input())
 ans = 0

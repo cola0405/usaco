@@ -1,12 +1,16 @@
-# 有些if条件是你试不出来的
+# 超时
+
 
 n = int(input())
 s = list(input())
 ans = 0
 
+cheat_sheet = []
+
 for i in range(n):
     g = 0
     h = 0
+
     for j in range(i, n):
         if s[j] == 'G':
             g += 1
