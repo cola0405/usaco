@@ -4,7 +4,6 @@
 # 竖直：上边是边界或#，下边两个是.
 
 import sys
-
 sys.stdin = open('crosswords.in', 'r')
 sys.stdout = open('crosswords.out', 'w')
 
