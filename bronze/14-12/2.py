@@ -41,6 +41,6 @@ for i in range(n):
             pos.append((i+1,j+1))
 
 print(ans)
-for i,j in pos:
-    print(i,j)
+for i, j in pos:
+    print(i, j)
 
