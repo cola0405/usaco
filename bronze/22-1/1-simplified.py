@@ -15,13 +15,18 @@ yellow = 0
 
 
 d = {}
+g = {}
 for i in range(len(ans)):
-    d[ans[i]] = 0
     if ans[i] in interact:
         if ans[i] in d.keys():
             d[ans[i]] += 1
         else:
             d[ans[i]] = 1
+    if guess[i] in g.keys():
+        g[guess[i]] += 1
+    else:
+        g[guess[i]] = 1
+
 
 for i in range(len(guess)):
     if guess[i] == ans[i]:
@@ -30,10 +35,9 @@ for i in range(len(guess)):
 
 for i in range(len(guess)):
     if guess[i] != ans[i] \
-            and guess[i] in interact \
-            and d[guess[i]] > 0:
-        yellow += 1
-        d[guess[i]] -= 1
+            and guess[i] in interact:
+        yellow += min(g[guess[i]], d[guess[i]])
+        d[guess[i]] = 0
 
 
 print(green)
