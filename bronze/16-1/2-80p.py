@@ -19,21 +19,23 @@ for i in range(n):
 
 pos.sort()
 
+i = 0
+r = 1
 ans = 1
-for i in range(0, len(pos)):
-    r = 1
-    count = 1
-    right = i
-    while i < len(pos):
-        while right+1 < len(pos) and pos[i]+r >= pos[right+1]:
-            right += 1
-            count += 1
-        left = i
-    while left-1 >= 0 and pos[i]-r <= pos[left-1]:
-        left -= 1
+count = 1
+while i < len(pos):
+    j = i
+    while j+1 < len(pos) and pos[i]+r >= pos[j+1]:
+        j += 1
         count += 1
-    ans = max(ans, count)
-
+    if j == i:
+        ans = max(ans, count)
+        r = 1
+        count = 1
+        i += 1
+    else:
+        r += 1
+        i = j
 
 print(ans)
 

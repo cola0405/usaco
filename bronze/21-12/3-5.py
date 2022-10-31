@@ -23,36 +23,35 @@ def checkColumn(path, column, start, end):
 
 
 round = int(input())
-ans = []
 for r in range(round):
     n, k = map(int, input().split(" "))
     path = []
     for row in range(n):
         path.append(input())
-    ans = 0
+    ans1 = 0
     home = n - 1
     if k >= 1:
         # go right at first
         if checkRow(path, 0, 0, home) \
                 and checkColumn(path, n - 1, 0, home):
-            ans += 1
+            ans1 += 1
         # go down at first
         if checkColumn(path, 0, 0, n - 1) \
                 and checkRow(path, n - 1, 1, home):
-            ans += 1
-    print('k=1', ans)
+            ans1 += 1
+    ans2 = 0
     if k >= 2:
         # go right at first
         for current_col in range(1, n - 1):
             if checkColumn(path, current_col, 0, home) \
                     and checkRow(path, n - 1, current_col + 1, home):
-                ans += 1
+                ans2 += 1
         # go down at first
         for current_row in range(1, n - 1):
             if checkRow(path, current_row, 0, home) \
                     and checkColumn(path, n-1, current_row + 1, home):
-                ans += 1
-    print('k=2', ans)
+                ans2 += 1
+    ans3 = 0
     if k >= 3:
         # go right at first
         for i in range(1, n-1):
@@ -60,7 +59,7 @@ for r in range(round):
                 if checkColumn(path, i, 0, j)\
                     and checkRow(path, j, i+1, n-1)\
                     and checkColumn(path, n-1, j+1, n-1):
-                    ans += 1
+                    ans3 += 1
 
         # go down at first
         for i in range(1, n - 1):
@@ -68,6 +67,7 @@ for r in range(round):
                 if checkRow(path, i, 0, j) \
                         and checkColumn(path, i, i + 1, n - 1) \
                         and checkRow(path, n-1, j + 1, n - 1):
-                    ans += 1
-    print('k=3', ans)
+                    ans3 += 1
+    ans = ans1+ans2+ans3
+    print(ans1,ans2,ans3)
     print(ans)
