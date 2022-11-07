@@ -1,5 +1,3 @@
-# 没啥思路，默认先提交 - 80%
-
 # 0 2 3 4
 # 该程序得到的答案 ans:3
 # 实际应该是 4
@@ -7,9 +5,7 @@
 
 # 0 2 3 4
 # 不用考虑先右后左（2开始爆，右到3，左到0）
-# 因为这种情况，在3开始爆也可以达到！
-
-# 已经炸了
+# 因为最远都到不了另外一边
 
 
 import sys
@@ -24,7 +20,9 @@ for i in range(n):
 pos.sort()
 
 ans = 1
+# 每个位置都模拟一遍
 for i in range(0, len(pos)):
+    # 往左边的爆炸
     left = i
     r = 1
     while True:
@@ -35,6 +33,7 @@ for i in range(0, len(pos)):
             break
         r += 1
 
+    # 往右边的爆炸
     right = i
     r = 1
     while True:

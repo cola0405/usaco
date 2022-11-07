@@ -4,7 +4,7 @@ UNBLOCKED = True
 
 def checkRow(path, row, start, end):
     current_col = start
-    while current_col < end:
+    while current_col <= end:
         if path[row][current_col] == 'H':
             return BLOCKED
         current_col += 1
@@ -14,12 +14,14 @@ def checkRow(path, row, start, end):
 
 def checkColumn(path, column, start, end):
     current_row = start
-    while current_row < end:
+    while current_row <= end:
         if path[current_row][column] == 'H':
             return BLOCKED
         current_row += 1
     else:
         return UNBLOCKED
+
+
 
 
 round = int(input())
@@ -33,21 +35,25 @@ for r in range(round):
     if k >= 1:
         # go right at first
         if checkRow(path, 0, 0, home) \
-                and checkColumn(path, n - 1, 0, home):
+                and checkColumn(path, n-1, 0, home):
             ans1 += 1
         # go down at first
-        if checkColumn(path, 0, 0, n - 1) \
-                and checkRow(path, n - 1, 1, home):
+        if checkColumn(path, 0, 0, home) \
+                and checkRow(path, n-1, 0, home):
             ans1 += 1
     ans2 = 0
     if k >= 2:
         # go right at first
-        for current_col in range(1, n - 1):
+        for current_col in range(1, n-1):
+            if path[0][current_col] == 'H':
+                break
             if checkColumn(path, current_col, 0, home) \
-                    and checkRow(path, n - 1, current_col + 1, home):
+                    and checkRow(path, n-1, current_col + 1, home):
                 ans2 += 1
         # go down at first
         for current_row in range(1, n - 1):
+            if path[current_row][0] == 'H':
+                break
             if checkRow(path, current_row, 0, home) \
                     and checkColumn(path, n-1, current_row + 1, home):
                 ans2 += 1
@@ -55,19 +61,27 @@ for r in range(round):
     if k >= 3:
         # go right at first
         for i in range(1, n-1):
+            if path[0][i] == 'H':
+                break
             for j in range(1, n-1):
+                if path[j][i] == 'H':
+                    break
                 if checkColumn(path, i, 0, j)\
                     and checkRow(path, j, i+1, n-1)\
                     and checkColumn(path, n-1, j+1, n-1):
                     ans3 += 1
 
         # go down at first
-        for i in range(1, n - 1):
+        for i in range(1, n-1):
+            if path[i][0] == 'H':
+                break
             for j in range(1, n - 1):
+                if path[i][j] == 'H':
+                    break
                 if checkRow(path, i, 0, j) \
-                        and checkColumn(path, i, i + 1, n - 1) \
-                        and checkRow(path, n-1, j + 1, n - 1):
+                        and checkColumn(path, j, i+1, n-1) \
+                        and checkRow(path, n-1, j+1, n-1):
                     ans3 += 1
     ans = ans1+ans2+ans3
-    print(ans1,ans2,ans3)
+    #print(ans1,ans2,ans3)
     print(ans)
