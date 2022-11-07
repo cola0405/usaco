@@ -13,5 +13,3 @@ for i in range(n-1):
     connections[b] += 1
 
 print(max(connections)+1)
-
-
