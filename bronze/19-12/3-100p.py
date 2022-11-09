@@ -1,4 +1,7 @@
 # 枚举，然后把每个条件过一遍做筛除
+
+# 如果原序列是字典序，那么全排列也会按字典序
+
 # 序列也是可以做比较的
 # 规则和字符串一样
 # for 暴力20p还有问题
@@ -13,13 +16,12 @@ for i in range(n):
     line = input().split()
     pairs.append((line[0], line[5]))
 
-cows = ('Beatrice', 'Belinda', 'Bessie',
-        'Betsy', 'Blue', 'Bella', 'Buttercup', 'Sue')
+cows = ('Beatrice', 'Belinda', 'Bella', 'Bessie',
+        'Betsy', 'Blue', 'Buttercup', 'Sue')
 
 def p():
     import itertools
     orders = itertools.permutations(cows, len(cows))
-    possible = []
     for order in orders:
         if len(order) > len(set(order)):
             continue
@@ -29,11 +31,6 @@ def p():
             if abs(inx1 - inx2) > 1:
                 break
         else:
-            possible.append(order)
-
-    return min(possible)
-
-
-order = p()
-for i in order:
-    print(i)
+            for i in order:
+                print(i)
+p()
