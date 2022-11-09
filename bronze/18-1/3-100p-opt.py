@@ -32,7 +32,7 @@ for i in range(len(lst)-1):
             flag = GO_RIGHT
             break
         # 相等那肯定就是中间那一个有问题，那小的就放前面
-        elif i+2<len(lst) and lst[i] <= lst[i+2]:
+        elif i+2 < len(lst) and lst[i] <= lst[i+2]:
             i = i + 1
             flag = GO_LEFT
             break

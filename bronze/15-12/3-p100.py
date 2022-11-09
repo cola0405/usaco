@@ -30,26 +30,27 @@ person_sickTime = []
 for i in range(s):
     person_sickTime.append(list(map(int, input().split())))
 
-d = {}
+# initialize the set
+person_milk = {}
 for i in range(1, n+1):
-    d[i] = set()
+    person_milk[i] = set()
 
-# avoid over count
+# get possible bad milk
 possible_bad_milk = set()
 for s in person_sickTime:
     for record in person_type_time:
         if record[PERSON] == s[PERSON] \
                 and record[TIME] < s[SICK_TIME]:
             possible_bad_milk.add(record[TYPE])
-            d[record[PERSON]].add(record[TYPE])
+            person_milk[record[PERSON]].add(record[TYPE])
 
+# remove the good milk
+for i in person_milk.keys():
+    if len(person_milk[i]) > 0:
+        good_milk = possible_bad_milk.difference(person_milk[i])
+        possible_bad_milk -= good_milk
 
-for i in d.keys():
-    if len(d[i]) > 0:
-        good_milk = possible_bad_milk.difference(d[i])
-        for t in good_milk:
-            possible_bad_milk.remove(t)
-
+# count the people
 possible_sick_person = set()
 for record in person_type_time:
     if record[TYPE] in possible_bad_milk:

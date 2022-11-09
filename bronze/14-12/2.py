@@ -3,33 +3,39 @@
 # 水平：左边是边界或#，右边两个是.
 # 竖直：上边是边界或#，下边两个是.
 
+# +1 +2 时一定要做好边界检查
+
 import sys
 sys.stdin = open('crosswords.in', 'r')
 sys.stdout = open('crosswords.out', 'w')
 
 n, m = map(int, input().split())
+
 path = []
 for i in range(n):
     path.append(input())
-
 
 def isClue(row, column):
     if path[row][column] == '#':
         return False
 
     # horizontal
-    if column < m-2 \
-            and (column == 0 or path[row][column - 1] == '#') \
-            and (path[row][column + 1] == '.' and path[row][column + 2] == '.'):
+    if column+2 < m \
+        and path[row][column+1] == '.'\
+        and path[row][column+2] == '.'\
+        and (column == 0
+             or (column-1 >= 0
+              and path[row][column-1] == '#')):
         return True
 
     # vertical
-    if row < n-2\
-            and (row == 0 or path[row - 1][column] == '#') \
-            and (path[row + 1][column] == '.' and path[row + 2][column] == '.'):
+    if row+2 < n \
+        and path[row+1][column] == '.'\
+        and path[row+2][column] == '.'\
+        and (row == 0
+             or (row-1 >= 0
+                 and path[row-1][column]== '#')):
         return True
-
-    return False
 
 
 ans = 0
