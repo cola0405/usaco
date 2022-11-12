@@ -17,24 +17,12 @@ pastures = [0]*(n+1)
 for i in range(1,5):
     j = 1
     while j <= n:
-        seeds = ['1','2','3','4']
-        if pastures == [0]:
+        seeds = ['1', '2', '3', '4']
+        if pastures[j] == 0:
             for k in range(j):
-                if k in no_repeat[j]:
+                if k in no_repeat[j] and str(pastures[k]) in seeds:
                     seeds.remove(str(pastures[k]))
-            pastures[j] = i
+            pastures[j] = seeds[0]
+        j += 1
 
 print(''.join(pastures[1:]))
-
-
-ans = [0]
-for pasture in range(1, n+1):
-    seeds = ['1', '2', '3', '4']
-    for j in no_repeat[pasture]:
-        if j > pasture:
-            continue
-        if str(ans[j]) in seeds:
-            seeds.remove(ans[j])
-    ans.append(seeds[0])
-
-print(''.join(ans[1:]))
