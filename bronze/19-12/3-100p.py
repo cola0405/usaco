@@ -23,8 +23,6 @@ def p():
     import itertools
     orders = itertools.permutations(cows, len(cows))
     for order in orders:
-        if len(order) > len(set(order)):
-            continue
         for pair in pairs:
             inx1 = order.index(pair[0])
             inx2 = order.index(pair[1])
@@ -33,4 +31,5 @@ def p():
         else:
             for i in order:
                 print(i)
+            return
 p()
