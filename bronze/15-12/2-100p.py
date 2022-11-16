@@ -1,3 +1,5 @@
+# 动草稿纸确定边界条件
+
 fin = open('speeding.in', 'r')
 fout = open('speeding.out', 'w')
 
