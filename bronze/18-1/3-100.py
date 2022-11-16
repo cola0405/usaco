@@ -1,3 +1,7 @@
+# 有序序列
+# no need to do the real swap
+# 模拟
+
 import sys
 sys.stdin = open('outofplace.in', 'r')
 sys.stdout = open('outofplace.out', 'w')

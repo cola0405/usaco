@@ -1,3 +1,5 @@
+# geometry
+
 fin = open('square.in', 'r')
 fout = open('square.out', 'w')
 
