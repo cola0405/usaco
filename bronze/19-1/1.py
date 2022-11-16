@@ -1,19 +1,45 @@
-# 连接数最多的能处理，其他任意范围的动能处理
-# 直接相连的和连接到同一个花圃的要求种类不同
-# 连接数+1
+# 抱怨是没有用的
+# 只有根据测试用例去推导题目的意思
+
+# ps: guess should be after the swap
 
 import sys
-
-sys.stdin = open("planting.in", "r")
-sys.stdout = open("planting.out", "w")
-
+sys.stdin = open("shell.in", "r")
+sys.stdout = open("shell.out", "w")
 
 n = int(input())
-connections = [0]*(n+1)
+swap_shells = []
+guess = []
+for i in range(n):
+    a, b, g = map(int, input().split())
+    swap_shells.append((a, b))
+    guess.append(g)
 
-for i in range(n-1):
-    a, b = map(int, input().split())
-    connections[a] += 1
-    connections[b] += 1
+ans = 0
+for pebble_loc in range(1,4):
+    shells = [0, 1, 2, 3]
+    score = 0
+    for i in range(n):
+        # swap
+        a, b = swap_shells[i]
+        shells[a], shells[b] = shells[b], shells[a]
 
-print(max(connections)+1)
+        # update pebble location
+        if pebble_loc == a:
+            pebble_loc = b
+        elif pebble_loc == b:
+            pebble_loc = a
+
+        # guess when after the swap
+        if guess[i] == pebble_loc:
+            score += 1
+
+    ans = max(ans, score)
+
+print(ans)
+
+
+
+
+
+
