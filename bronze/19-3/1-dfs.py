@@ -1,4 +1,5 @@
 # step三维数组剪枝
+# 10x10大不好debug的话，可以把grid缩小方便debug
 
 import sys
 sys.stdin = open('buckets.in', 'r')
