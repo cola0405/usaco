@@ -1,5 +1,5 @@
 # 超时
-
+# 60p
 
 n = int(input())
 s = list(input())
