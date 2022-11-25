@@ -38,13 +38,19 @@ max_column = max(B[COLUMN], L[COLUMN])
 min_row = min(B[ROW], L[ROW])
 max_row = max(B[ROW], L[ROW])
 
-ans = (max_column-min_column) + (max_row-max_column)-1
-# R在中间才+1
-if R[ROW] == B[ROW] \
-        and min_column < R[COLUMN] < max_column:
-    ans += 2
-if R[COLUMN] == B[COLUMN] \
-        and min_row < R[ROW] < max_row:
-    ans += 2
-print(ans)
+ans = 0
+if B[ROW] == L[ROW]:
+    # R在中间才+1
+    if R[ROW] == B[ROW] and min_column < R[COLUMN] < max_column:
+        ans = abs(B[COLUMN]-L[COLUMN]) + 1
+    else:
+        ans = abs(B[COLUMN]-L[COLUMN]) - 1
+elif B[COLUMN] == L[COLUMN]:
+    if R[COLUMN] == B[COLUMN] and min_row < R[ROW] < max_row:
+        ans = abs(B[ROW]-L[ROW]) + 1
+    else:
+        ans = abs(B[ROW]-L[ROW]) - 1
+else:
+    ans = abs(B[ROW]-L[ROW]) + abs(B[COLUMN]-L[COLUMN]) - 1
 
+print(ans)
