@@ -21,27 +21,26 @@ n = int(input())
 G = []
 L = []
 for i in range(n):
-    s = input()
-    if s[0] == 'G':
-        G.append(int(s[2:]))
+    line = input().split()
+    word = line[0]
+    if word == 'G':
+        G.append(int(line[1]))
     else:
-        L.append(int(s[2:]))
+        L.append(int(line[1]))
 
 G.sort()
 L.sort()
 
-def f():
-    ans = 1000
-    for i in range(0, len(G)):
-        for j in range(0, len(L)):
-            G_max = G[-i-1]
-            L_min = L[j]
-            if G_max <= L_min:
-                ans = min(ans, i+j)
-                break
-    return min(len(G), len(L), ans)
-
-print(f())
-
+n = len(G)
+ans = 1000
+for i in range(len(G)):
+    for j in range(len(L)):
+        G_max = G[n-1-i]
+        L_min = L[j]
+        if G_max <= L_min:
+            ans = min(ans, i+j)
+            break
+ans = min(ans, len(G), len(L))
+print(ans)
 
 

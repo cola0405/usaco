@@ -16,13 +16,12 @@ path = []
 for i in range(10):
     path.append(input())
 
-
-ROW = 0
-COLUMN = 1
-
 B = None
 R = None
 L = None
+ROW = 0
+COLUMN = 1
+
 
 for i in range(10):
     for j in range(10):
@@ -38,7 +37,10 @@ max_column = max(B[COLUMN], L[COLUMN])
 min_row = min(B[ROW], L[ROW])
 max_row = max(B[ROW], L[ROW])
 
-ans = (max_column-min_column) + (max_row-max_column)-1
+row_gap = max_row-min_row
+column_gap = max_column-min_column
+
+ans = row_gap + column_gap - 1
 # R在中间才+1
 if R[ROW] == B[ROW] \
         and min_column < R[COLUMN] < max_column:
