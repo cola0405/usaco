@@ -20,6 +20,9 @@ max_ans = 0
 
 loc = list(map(int, input().split()))
 loc.sort()
+
+
+
 max_gap0 = loc[2] - loc[0]
 max_gap1 = loc[2] - loc[1]
 min_gap1 = loc[1] - loc[0]

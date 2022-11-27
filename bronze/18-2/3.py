@@ -13,25 +13,37 @@ MISSING = -1
 n = int(input())
 log = list(map(int, input().split()))
 
-for i in range(n):
-    if log[i] != -1:
-        j = 0
-        days = log[i]
-        while j < days:
-            log[i-j] = NO_BREAKOUT
-            j += 1
-        log[i-j] = BREAKOUT
+def update():
+    for i in range(n):
+        if log[i] != -1:
+            j = 0
+            days = log[i]
+            while j < days:
+                if log[i-j] == log[i] \
+                        or log[i-j] == MISSING:
+                    log[i - j] = NO_BREAKOUT
+                    j += 1
+                else:
+                    return False
+            log[i - j] = BREAKOUT
+    log[0] = BREAKOUT
+    return True
 
-log[0] = BREAKOUT
 
-# min
-min_ans = 0
-max_ans = 0
-for i in log:
-    if i == BREAKOUT:
-        min_ans += 1
-        max_ans += 1
-    elif i == MISSING:
-        max_ans += 1
+if update():
+    # counting
+    min_ans = 0
+    max_ans = 0
+    for i in log:
+        if i == BREAKOUT:
+            min_ans += 1
+        elif i == MISSING:
+            max_ans += 1
 
-print(min_ans, max_ans)
+    max_ans += min_ans
+    print(min_ans, max_ans)
+
+else:
+    print(-1)
+
+
