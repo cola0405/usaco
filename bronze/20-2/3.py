@@ -6,43 +6,28 @@
 
 
 import sys
-sys.stdin = open('swap.in', 'r')
-sys.stdout = open('swap.out', 'w')
+sys.stdin = open("swap.in", "r")
+sys.stdout = open("swap.out", "w")
+n, k = map(int, input().strip().split())
+a1, a2 = map(int, input().strip().split())
+b1, b2 = map(int, input().strip().split())
 
-n, k = map(int, input().split())
-a1, a2 = map(int, input().split())
-b1, b2 = map(int, input().split())
-a1 -= 1
-a2 -= 1
-b1 -= 1
-b2 -= 1
-
-prev = list(range(1,n+1))
-prev_record = tuple(prev)
-record = [prev_record]
-record_set = {prev_record}
-
+cows = list(range(1, n + 1))
+record = [tuple(cows)]
+s = set(record)
+ans = []
 for i in range(k):
-    # first step
-    if a1 == 0:
-        prev[a1:a2 + 1] = prev[a2::-1]
-    else:
-        prev[a1:a2+1] = prev[a2:a1-1:-1]
+    cows[a1-1: a2] = cows[a1-1: a2][::-1]
+    cows[b1-1: b2] = cows[b1-1: b2][::-1]
 
-    # second step
-    if b1 == 0:
-        prev[b1:b2 + 1] = prev[b2::-1]
-    else:
-        prev[b1:b2+1] = prev[b2:b1-1:-1]
-
-    current = tuple(prev)
-    if current not in record_set:
-        record_set.add(current)
-        record.append(current)
-    else:
-        cycle = len(record_set)
-        ans = record[k%cycle]
+    t = tuple(cows)
+    if t in s:
+        cycle = len(record)
+        ans = record[k % cycle]
         break
+    else:
+        s.add(t)
+        record.append(t)
 else:
     ans = record[-1]
 
