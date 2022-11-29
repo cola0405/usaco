@@ -1,7 +1,6 @@
 # 是否取等号 -- 重要检查项
 
 import sys
-
 sys.stdin = open('photo.in', 'r')
 sys.stdout = open('photo.out', 'w')
 
