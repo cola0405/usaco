@@ -24,14 +24,12 @@ def isConsistent(pair):
 
 
 ans = 0
-for i in range(1, n):
-    for j in range(i+1, n+1):
-        pair1 = (i, j)
-        pair2 = (j, i)
-        if isConsistent(pair1):
-            ans += 1
+for i in range(1, n+1):
+    for j in range(1, n+1):
+        if i == j:
             continue
-        if isConsistent(pair2):
+        pair = (i, j)
+        if isConsistent(pair):
             ans += 1
 
 print(ans)

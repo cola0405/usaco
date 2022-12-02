@@ -9,6 +9,8 @@
 
 # 2832ms
 
+# http://www.usaco.org/current/data/sol_prob2_bronze_feb21.html
+
 border = 1000
 COMFORTABLE = 2
 
