@@ -1,51 +1,88 @@
+# 考读题
+# 题目有两个很重要的信息点
+# 1.只有N和E走向
+# 2.如果两头牛同时走到一块草地，则共享吃那块草地，不停
 
+# 可按照从下到上、从左到右的顺序分别处理E和N方向的牛
+# 按顺序check的话，可以最快发现被迫stop的牛
 
-record_dict = {'N':[], 'E':[], 'S':[], 'W':[]}
-records = []
+# 举个例子：从下往上检查E方向的牛
+# 检查步骤：
+# 1.先利用x、y确定有无可能会碰撞
+# 2.检查该牛有没有被之前的E牛阻拦（足矣）
 
+N = []
+E = []
+ans = dict()
 n = int(input())
 for i in range(n):
     direction, x, y = input().split()
-    record_dict[direction].append((int(x), int(y)))
-    records.append((direction, int(x), int(y)))
+    point = (int(x),int(y))
+    if direction == 'N':
+        N.append(point)
+    else:
+        E.append(point)
+    ans[point] = 0
 
-already_check = [0]*n
+# N牛按照x从小到大排列
+def sort_for_N(pair):
+    return pair[0]
 
+# E牛按照y从小到大排列
+def sort_for_E(pair):
+    return pair[1]
 
-for i in range(n):
-    direction1 = records[i][0]
-    point1 = records[i][1:]
-    for j in range(n):
-        if j == i:
+N.sort(key=sort_for_N)
+E.sort(key=sort_for_E)
+
+for i in range(len(E)):
+    i_x, i_y = E[i]
+    for j in range(len(N)):
+        j_x, j_y = N[j][0], N[j][1]
+        # 判断有无碰撞的可能
+        if j_y > i_y or j_x < i_x:
             continue
-        direction2 = records[j][0]
-        point2 = records[j][1:]
-
-
-        # interact or not
-        if direction1 == direction2:
+        # 看看这个N牛此前有没有提前stop
+        if len(N[j]) > 2 and j_y+N[j][2] < i_y:
             continue
-        ix,iy = point1
-        jx,jy = point2
-        x_gap = abs(ix - jx)
-        y_gap = abs(iy - jy)
-        # 拦不到
-        if direction1 == 'E' and direction2 == 'N' \
-            and x_gap - y_gap >= 1:
+        x_gap = j_x - i_x
+        y_gap = i_y - j_y
+        if x_gap > y_gap:
+            ans[(i_x, i_y)] = x_gap
+            E[i] = (i_x, i_y, x_gap)
+            break
+        elif x_gap == y_gap:
             continue
-        # 拦到了记录，则记录gap，最后取最大
-        # 如果gap为-1，则是没人能拦到
-        for k in range(n):
-            if k == i or k == j:
-                continue
-            direction3 = records[k][0]
-            point3 = records[k][1:]
+        else:
+            # N牛被阻挡了，记录已走路程
+            N[j] = (j_x, j_y, y_gap)
+    else:
+        ans[(i_x, i_y)] = 'Infinity'
 
-            # whether interrupt
-            if direction3 == direction2:
-                pass
-        # if valid then count it
-    # get the max
+for i in range(len(N)):
+    i_x, i_y = N[i][0], N[i][1]
+    for j in range(len(E)):
+        if len(E[j]) > 2 and E[j][0]+E[j][2] < i_x:
+            continue
+        j_x, j_y = E[j][0], E[j][1]
+        if j_y < i_y or j_x > i_x:
+            continue
+        x_gap = i_x - j_x
+        y_gap = j_y - i_y
+        if y_gap > x_gap:
+            ans[(i_x,i_y)] = y_gap
+            break
+        elif x_gap == y_gap:
+            continue
+    else:
+        ans[(i_x,i_y)] = 'Infinity'
+
+
+for i in ans.values():
+    print(i)
+
+
+
 
 
 
