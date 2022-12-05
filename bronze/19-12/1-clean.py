@@ -13,9 +13,7 @@ for i in range(k):
 def isConsistent(pair):
     a, b = pair[0], pair[1]
     for rank in ranks:
-        a_inx = rank.index(a)
-        b_inx = rank.index(b)
-        if a_inx > b_inx:
+        if rank.index(a) > rank.index(b):
             return False
     return True
 
