@@ -1,6 +1,8 @@
-# 不能简单对半分，即使左边比右边多两三个也不为过
-# 因为之后还有另外一个方向的切分
-# 所以“两边尽可能平衡”不能作为评判的标准
+# 近似法
+# 单层for循环能取所有点
+# 双重for循环能遍历所有可能的切割情况
+# “当前x下划出所有y的切割线”
+
 
 import sys
 sys.stdin = open('balancing.in', 'r')
@@ -12,41 +14,12 @@ Y = []
 points = []
 for i in range(n):
     x, y = map(int, input().split())
-    points.append((x,y))
+    points.append((x, y))
     X.append(x)
     Y.append(y)
 
 
-def find_mid(C):
-    mid_inx = n // 2
-    if n % 2 == 0:
-        right = mid_inx
-        left = mid_inx - 1
-    else:
-        left = mid_inx
-        right = mid_inx + 1
-    while left >= 0 and right < n:
-        if C[left] != C[mid_inx]:
-            mid = C[mid_inx] - 1
-            break
-        elif C[right] != C[mid_inx]:
-            mid = C[mid_inx] + 1
-            break
-        left -= 1
-        right += 1
-    else:
-        if left == 0:
-            mid = C[left]+1
-        else:
-            mid = C[right]-1
-    return mid
-
-
-if n != 1:
-    X.sort()
-    Y.sort()
-    x = find_mid(X)
-    y = find_mid(Y)
+def count(x, y):
     count1 = 0
     count2 = 0
     count3 = 0
@@ -60,7 +33,12 @@ if n != 1:
             count3 += 1
         else:
             count4 += 1
-    print(max(count1, count2, count3, count4))
+    return max(count1, count2, count3, count4)
 
-else:
-    print(1)
+
+ans = 100
+for x in X:
+    for y in Y:
+        ans = min(ans, count(x+1, y+1))
+
+print(ans)
