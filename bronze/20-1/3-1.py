@@ -15,24 +15,9 @@ for i in range(n):
     down = 0
     while left <= right:
         mid = (left+right)//2
-        up = mid*(mid-1)//2 + mid
-        if mid < x:
-            left = mid + 1
-            continue
-        possible = up + mid*mid
-        if possible > k:
+        meters = (2*mid**2-x**2+x)/2
+        if meters > k:
             right = mid-1
         else:
             left = mid+1
-    if up == k:
-        print(mid)
-    else:
-        down_gap = max(mid*(mid-1)//2 - x*(x-1)//2, 0)
-        extend = max(k - up - down_gap, 0)
-        if extend == 0:
-            print(mid + mid-x)
-        else:
-            if mid != x:
-                print(mid + mid-x+1)
-            else:
-                print(mid+2)
+    print(mid)
