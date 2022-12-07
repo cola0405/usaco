@@ -1,3 +1,5 @@
+# 枚举
+
 import sys
 sys.stdin = open('pails.in', 'r')
 sys.stdout = open('pails.out', 'w')
