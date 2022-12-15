@@ -11,11 +11,6 @@ sys.stdout = open("backforth.out", "w")
 bkt1 = list(map(int, input().split()))
 bkt2 = list(map(int, input().split()))
 
-bkt1_record = tuple(bkt1)
-bkt2_record = tuple(bkt2)
-
-nums = [0,1,2,3,4,5,6,7,8,9,10]
-
 def move(inx, src_tank, dest_tank, src_bkt, dest_bkt):
     if inx >= len(src_bkt):
         return -1
@@ -28,16 +23,15 @@ def move(inx, src_tank, dest_tank, src_bkt, dest_bkt):
 
 
 ans = set()
-for a in range(11):
+for a in range(10):
     for b in range(11):
-        for c in range(11):
+        for c in range(10):
             for d in range(11):
                 tank1 = 1000
                 tank2 = 1000
-                bkt1 = list(bkt1_record)
-                bkt2 = list(bkt2_record)
+                tmp1 = bkt1[:]
+                tmp2 = bkt2[:]
                 order = (a, b, c, d)
-
                 for inx in [0,2]:
                     res = move(order[inx], tank1, tank2, bkt1, bkt2)
                     if res == -1:

@@ -9,6 +9,7 @@ sys.stdout = open('word.out', 'w')
 n, k = map(int, input().split())
 words = input().split()
 
+
 line = words[0]
 chars = len(words[0])
 for word in words[1:]:
