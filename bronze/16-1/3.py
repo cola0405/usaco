@@ -15,23 +15,23 @@ n = int(input())
 for i in range(n):
     direction, step = input().split()
     step = int(step)
-    on_x = 0
-    on_y = 0
+    dx = 0
+    dy = 0
 
     if direction == 'N':
-        on_x = -1
+        dx = -1
     elif direction == 'S':
-        on_x = 1
+        dx = 1
     elif direction == 'W':
-        on_y = -1
+        dy = -1
     else:
-        on_y = 1
+        dy = 1
 
     # move
     for i in range(step):
         count += 1
-        x += 1 * on_x
-        y += 1 * on_y
+        x += dx
+        y += dy
         if cells[x][y] != 0:
             ans = min(ans, count - cells[x][y])
         cells[x][y] = count
