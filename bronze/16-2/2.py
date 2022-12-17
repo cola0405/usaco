@@ -11,7 +11,7 @@ nums = []
 for i in range(n):
     nums.append(int(input()))
 
-ans = 2e10
+ans = float('inf')
 for i in range(n):
     distance = 0
     doors = 1

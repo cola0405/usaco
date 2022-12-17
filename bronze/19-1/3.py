@@ -28,7 +28,7 @@ for i in animal_chas:
     for j in animal_chas:
         if i == j:
             continue
-        intersect_num = len(animal_chas[i].intersection(animal_chas[j]))
+        intersect_num = len(animal_chas[i] & animal_chas[j])
         count = max(count, intersect_num)
 
 print(count+1)
