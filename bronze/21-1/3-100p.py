@@ -19,7 +19,7 @@ for i in b:
 
 ans = 1
 step = 0
-for i in nums[:-1]:
+for i in nums:
     ans *= i-step
     step += 1
 

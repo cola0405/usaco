@@ -17,14 +17,6 @@ def is_consistent(col, inp):
             outps.add(program_outp)
     return len(outps) == 1
 
-def not_zero(inp):
-    program_inp = inp[0]
-    return program_inp[col] != '0'
-
-def not_one(inp):
-    program_inp = inp[0]
-    return program_inp[col] != '1'
-
 for _ in range(t):
     input()
     n,m = map(int, input().split())
@@ -37,10 +29,10 @@ for _ in range(t):
             if is_consistent(col, inp='0'):
                 # filter 留True
                 # 筛去0的，留下非0的
-                program = list(filter(not_zero, program))
+                program = list(filter(lambda p:p[0][col] != '0', program))
                 break
             if is_consistent(col, inp='1'):
-                program = list(filter(not_one, program))
+                program = list(filter(lambda p:p[0][col] != '1', program))
                 break
         else:
             print('LIE')

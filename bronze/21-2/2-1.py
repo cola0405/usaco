@@ -49,7 +49,7 @@ for i in range(n):
     count = check_horizontal(1) + check_horizontal(-1)
     count += check_vertical(1) + check_vertical(-1)
     pasture[x][y] += count
-    if count == 4:
+    if count == 3:
         ans += 1
     print(ans)
 

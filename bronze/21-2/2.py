@@ -70,7 +70,7 @@ for i in range(n):
     pasture[x][y] = 1
     count = up(x, y) + down(x, y) + left(x, y) + right(x, y)
     pasture[x][y] += count
-    if count == 4:
+    if count == 3:
         ans += 1
     print(ans)
 

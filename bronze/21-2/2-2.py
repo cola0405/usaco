@@ -40,7 +40,7 @@ for i in range(n):
     for dx,dy in orders:
         count += check(dx, dy)
     pasture[x][y] += count
-    if count == 4:
+    if count == 3:
         ans += 1
     print(ans)
 
