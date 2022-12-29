@@ -17,6 +17,21 @@ def is_consistent(col, inp):
             outps.add(program_outp)
     return len(outps) == 1
 
+def pop_zeros():
+    i = len(program)-1
+    while i >= 0:
+        if program[i][0][col] == '0':
+            program.pop(i)
+        i -= 1
+
+def pop_ones():
+    i = len(program)-1
+    while i >= 0:
+        if program[i][0][col] == '1':
+            program.pop(i)
+        i -= 1
+
+
 for _ in range(t):
     input()
     n,m = map(int, input().split())
@@ -25,11 +40,14 @@ for _ in range(t):
         program.append(input().split())
     while len(program) > 0:
         for col in range(n):
+            # inp='0'时，对应的res是否都一致
             if is_consistent(col, inp='0'):
-                program = list(filter(lambda p:p[0][col] != '0', program))
+                # filter 留True
+                # 筛去0的，留下非0的
+                pop_zeros()
                 break
             if is_consistent(col, inp='1'):
-                program = list(filter(lambda p:p[0][col] != '1', program))
+                pop_ones()
                 break
         else:
             print('LIE')
