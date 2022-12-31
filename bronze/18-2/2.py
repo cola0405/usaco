@@ -2,7 +2,7 @@
 # 把球传给最靠左的那头牛
 
 # 1.孤独的牛--init 给
-# 2.只有相互给对方的--给（有第三方给进来都不算）
+# 2.“只给对方”--给（有第三方给进来都不算）
 
 import sys
 sys.stdin = open("hoofball.in","r")
@@ -30,7 +30,7 @@ ans = 0
 for i in range(n):
     if passto[i] == 0:
         ans += 1
-    # ps: passto都是计数为1才算是“只有”相互给对方
+    # ps: passto都是计数为1,才算是“只给对方”，好好理解
     elif i < target(i) and target(target(i)) == i \
             and passto[i] == 1 and passto[target(i)] == 1:
         ans += 1
