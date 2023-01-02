@@ -1,4 +1,7 @@
 # 都手写列出来就行
+# 余n个时，对应的处理
+
+# ps 题目不允许有牛未编入组
 
 n = int(input())
 cows = list(map(int, input().split()))
