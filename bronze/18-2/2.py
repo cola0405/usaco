@@ -1,30 +1,38 @@
+# pass the ball to the cow farthest to the left among these
+# 把球传给最靠左的那头牛
+
+# 1.孤独的牛--init 给
+# 2.“只给对方”--给（有第三方给进来都不算）
+
 import sys
 sys.stdin = open("hoofball.in","r")
 sys.stdout = open("hoofball.out","w")
 
 n = int(input())
-cows = list(map(int, input().split()))
-cows.sort()
+x = list(map(int, input().split()))
+x.sort()
+def target(i):
+    if i == 0:
+        return 1
+    if i == n-1:
+        return n-2
 
-way1 = 1
-i = 0
-nearest = 2000
-while i+1<len(cows):
-    gap = cows[i+1] - cows[i]
-    if gap > nearest:
-        way1 += 1
-    nearest = gap
-    i += 1
+    if x[i] - x[i-1] <= x[i+1] - x[i]:
+        return i-1
+    else:
+        return i+1
 
-way2 = 1
-i = len(cows)-1
-nearest = 2000
-while i-1>=0:
-    gap = cows[i] - cows[i-1]
-    if gap >= nearest:
-        way2 += 1
-    nearest = gap
-    i -= 1
+passto = [0]*n
+for i in range(n):
+    passto[target(i)] += 1
 
-ans = min(way1,way2)
+ans = 0
+for i in range(n):
+    if passto[i] == 0:
+        ans += 1
+    # ps: passto都是计数为1,才算是“只给对方”，好好理解
+    elif i < target(i) and target(target(i)) == i \
+            and passto[i] == 1 and passto[target(i)] == 1:
+        ans += 1
+
 print(ans)
