@@ -1,5 +1,4 @@
-# logic
-# basic
+# find min2
 
 import sys
 sys.stdin = open("notlast.in", 'r')
@@ -16,36 +15,18 @@ for i in range(n):
     name, amount = input().split()
     log[name] += int(amount)
 
+# find min2
+milks = list(log.values())
+min1 = min(milks)
+min2 = float('inf')
+for milk in milks:
+    if min2 > milk > min1:
+        min2 = milk
 
-def find_sec():
-    milks = list(log.values())
-    milks.sort()
-
-    # no second
-    M = milks[0]
-    sec = None
-    for i in milks:
-        if i != M:
-            sec = i
-            break
-    else:
-        print("Tie")
-        return
-
-    # not only one -- Tie
-    if milks.count(sec) > 1:
-        print("Tie")
-        return
-
-    # got the second
-    for i in log.keys():
-        if log[i] == sec:
+if min2 == float('inf') or milks.count(min2) > 1:
+    print("Tie")
+else:
+    for i in log:
+        if log[i] == min2:
             print(i)
-
-find_sec()
-
-
-
-
-
-
+            break

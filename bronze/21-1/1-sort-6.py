@@ -1,3 +1,4 @@
+# 效率要比模拟高得多
 table = input()
 target = input()
 
