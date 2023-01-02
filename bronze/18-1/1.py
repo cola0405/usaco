@@ -1,7 +1,7 @@
 # 熟练运用交集的几何知识
 
 import sys
-sys.stdin = open('../18-2/billboard.in', 'r')
+sys.stdin = open('billboard.in', 'r')
 sys.stdout = open('billboard.out', 'w')
 
 ax,ay,bx,by = map(int, input().split())
