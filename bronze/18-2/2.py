@@ -11,13 +11,15 @@ sys.stdout = open("hoofball.out","w")
 n = int(input())
 x = list(map(int, input().split()))
 x.sort()
+
 def target(i):
     if i == 0:
         return 1
     if i == n-1:
         return n-2
-
-    if x[i] - x[i-1] <= x[i+1] - x[i]:
+    left = x[i-1]
+    right = x[i+1]
+    if x[i] - left <= right - x[i]:
         return i-1
     else:
         return i+1
@@ -31,6 +33,7 @@ for i in range(n):
     if passto[i] == 0:
         ans += 1
     # ps: passto都是计数为1,才算是“只给对方”，好好理解
+    # ps: i<target(i) 来保证不重复计数
     elif i < target(i) and target(target(i)) == i \
             and passto[i] == 1 and passto[target(i)] == 1:
         ans += 1
