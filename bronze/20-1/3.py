@@ -26,5 +26,5 @@ for i in range(n):
             time += 1
             if up_meter + down_meter >= k:
                 break
-    print(up_meter,down_meter,up_meter+down_meter)
+    #print(up_meter,down_meter,up_meter+down_meter)
     print(time)
