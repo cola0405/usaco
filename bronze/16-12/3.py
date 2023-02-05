@@ -11,16 +11,12 @@ for i in range(n):
 
 ans = []
 for line in signal:
-    i = 0
     temp = ''
-    while i < m:
-        j = i
-        while j+1 < m and line[j] == line[j+1]:
-            j += 1
-        temp += line[i:j+1]*k
-        i = j+1
+    for c in line:
+        temp += c*k
+
     for i in range(k):
-        ans.append(temp)
+        print(temp)
 
 for i in ans:
     print(i)

@@ -7,9 +7,8 @@ goal = list(map(int, input().split()))
 
 ans = 0
 i = 0
-j = 0
 abandon = set()
-while j < n:
+for j in range(n):
     if origin[i] in abandon:
         i += 1
         continue
@@ -18,5 +17,4 @@ while j < n:
         abandon.add(goal[j])
     else:
         i += 1
-    j += 1
 print(ans)
