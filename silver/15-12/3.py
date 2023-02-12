@@ -1,3 +1,5 @@
+# 三个前缀和分别统计
+
 import sys
 sys.stdin = open('bcount.in', 'r')
 sys.stdout = open('bcount.out', 'w')

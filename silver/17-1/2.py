@@ -1,3 +1,7 @@
+# 总体的思路与知识点无关，枚举变换前半赢的和后半赢的
+# 前缀和只是来帮助提高统计效率
+
+
 from itertools import permutations
 import sys
 sys.stdin = open("hps.in", "r")

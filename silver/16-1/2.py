@@ -1,3 +1,5 @@
+# 区间和
+
 import sys
 sys.stdin = open('div7.in', 'r')
 sys.stdout = open('div7.out', 'w')
