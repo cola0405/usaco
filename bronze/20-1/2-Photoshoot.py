@@ -1,3 +1,4 @@
+# 根据题目给的关系公式递推求解
 import sys
 sys.stdin = open('photo.in', 'r')
 sys.stdout = open('photo.out', 'w')
