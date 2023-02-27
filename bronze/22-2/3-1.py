@@ -1,5 +1,10 @@
+# 0.03199887275695801
+
+
 from itertools import permutations
 n = int(input())
+import time
+start = time.time()
 
 cubes = []
 for i in range(4):
@@ -27,3 +32,5 @@ for i in ans:
         print('YES')
     else:
         print('NO')
+
+print(time.time() - start)
