@@ -1,8 +1,4 @@
-import smtpd
-
 t = int(input())
-
-
 
 def clockwise_90(s):
     # copy s to tmp
