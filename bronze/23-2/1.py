@@ -1,6 +1,7 @@
 N, T = map(int, input().split())
 
 ans = 0
+# 已经吃完第 day 天的粮食
 day = 0
 for _ in range(N):
     di, bi = map(int, input().split())
@@ -63,6 +64,7 @@ else:
 # 2 10
 # 3 5
 # 5 5
+ # 8
 
 # 3 10
 # 1 5

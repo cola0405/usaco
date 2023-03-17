@@ -1,20 +1,15 @@
 t = int(input())
 
 def clockwise_90(s):
-    # copy s to tmp
-    tmp = []
-    for line in s:
-        tmp.append(line.copy())
+    res = []
+    k = len(s)
+    for i in range(k):
+        res.append([0] * k)
 
-    k = len(tmp)
-    # 先转置
-    for row in range(k):
-        for column in range(row):
-            tmp[row][column], tmp[column][row] = tmp[column][row], tmp[row][column]
-    # 再逆序
-    for i in range(k//2):
-        tmp[i], tmp[-1-i] = tmp[-1-i], tmp[i]
-    return tmp
+    for i in range(k):
+        for j in range(k):
+            res[j][k-1 - i] = s[i][j]
+    return res
 
 
 def draw(stamp, canvas, i, j):
@@ -55,12 +50,6 @@ for _ in range(t):
     for i in range(3):
         stamps.append(clockwise_90(stamps[-1]))
 
-    # to tuple, to set
-    # for s in stamps:
-    #     for row in s:
-    #         print(row)
-    #     print()
-
     # 遍历canvas
     for i in range(N):
         for j in range(N):
@@ -94,14 +83,3 @@ for _ in range(t):
 # ...
 # ...
 # ***
-
-# 1
-#
-# 3
-# .**
-# .**
-# ***
-# 2
-# .*
-# .*
-
