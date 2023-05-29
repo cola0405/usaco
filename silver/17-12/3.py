@@ -17,6 +17,7 @@ for i in range(1,n+1):
         flag[i] = 1
 
 for i in range(1,n+1):
+    # chain 必须要剪枝
     if flag[i] == 1 or flag[i] == -1 or parent[i] == 0:
         continue
     cur = i
