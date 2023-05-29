@@ -2,7 +2,6 @@ import sys
 sys.stdin = open('breedflip.in', 'r')
 sys.stdout = open('breedflip.out', 'w')
 
-
 n = int(input())
 A = input()
 B= input()
@@ -17,3 +16,4 @@ while i < n:
         i += 1
     ans += 1
 print(ans)
+
