@@ -12,9 +12,14 @@ def fine(x, day):
             return already + m*day >= n
 
         # already只是每次循环+1的话，让y值变小1都费劲(当x的值足够大时)
-        # 这里需要skip优化，gap是要让y值变化，already需要累积的量（列方程得表达式）
-        gap = n-already-(y-1)*x
-        # gap//y 则是already积累所需天数
+        # 这里需要skip优化，gap是要让y值变化，already需要累积的量
+        # 列方程得到的是n-already-(y-1)*x
+        # 但这是不对的！因为列方程时(n-already-?y)/x=(y-1) 求解未知数？
+        # 这里的"等于"是"约等于", 是向下取整后的！
+        # 所以，不能直接这么列，应该用极限的思维找临界点
+        # (n-already-?)/x=y, ? = n-already-y*x 这里的是等号,这样求出来的gap才是临界准确的！
+        gap = n-already-y*x
+        # gap/y 则是already积累所需天数
         # 可以状态压缩的，快进的天数
         # 可能不是整除，需要向上取整!!!!!!
         need = max(math.ceil(gap/y), 1)  # 当前y足够支撑下次变化，则不需要skip，按正常1天算
@@ -28,7 +33,6 @@ low = 1
 high = n
 while low<high:
     mid = (low+high+1)//2
-    # print(mid)
     if fine(mid, k):
         low = mid
     else:
