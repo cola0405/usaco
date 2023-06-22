@@ -25,9 +25,7 @@ while e_inx < n and b_inx < n:
     if elsie[e_inx] < bessie[b_inx]:
         score += 1
         e_inx += 1
-        b_inx += 1
-    else:
-        b_inx += 1
+    b_inx += 1
 
 print(score)
 

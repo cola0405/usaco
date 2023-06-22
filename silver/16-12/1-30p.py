@@ -1,5 +1,6 @@
 # 超时，但是可以学习
 # 加深二分的理解
+# python 是否使用内置函数的区别。。。
 
 import sys
 sys.stdin = open("haybales.in", "r")
@@ -61,5 +62,4 @@ for i in range(q):
     inx1 = lower_bound(start)
     inx2 = upper_bound(end)
     res = inx2-inx1
-    #print(inx1,inx2)
     print(res)
