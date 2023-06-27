@@ -1,3 +1,8 @@
+# 问题转换
+# 说白了就是让A+B尽可能小，然后求A+B的最大值
+# sort+贪心+双指针两边逼近(这里用了双端队列替代)
+# 又因为数据范围，没办法用线性表，得用hash表
+
 from collections import deque
 import sys
 sys.stdin = open("pairup.in", "r")

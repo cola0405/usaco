@@ -1,7 +1,6 @@
-# 最优情况肯定是x ... x
-# 但是要注意的是，左右的x也可能需要修
-# 解决办法是额外加两边边界
-
+# 说白了拿一个长度为k的窗口直接滑就行。。。
+# 前缀和帮助统计区间内坏信号灯的数量，找最小值
+# 区间问题 - 前缀和
 
 
 import sys
@@ -10,31 +9,19 @@ sys.stdout = open("maxcross.out", "w")
 
 n,k,b = map(int, input().split())
 
-# 加两边边界
-broken = [0, n+1]
+broken = [0]*(n+1)
 for i in range(b):
-    broken.append(int(input()))
+    broken[int(input())] = 1
 
-broken.sort()
-b += 2
-p = [0]*(n+3)
-i = 1
-j = 0
-while i<=n:
-    if j<b and i == broken[j]:
-        p[i] = p[i-1]+1
-        j += 1
-    else:
-        p[i] = p[i-1]
-    i += 1
+p = [0]*(n+1)
+for i in range(1,n+1):
+    p[i] = p[i-1]
+    if broken[i] == 1:
+        p[i] += 1
 
-min_op = float("inf")
-for i in range(b):
-    if n-broken[i]+1 < k:
-        break
-    for j in range(i+1, b):
-        # 只修中间的若干个
-        if broken[j]-broken[i] - 1 >= k:
-            min_op = min(j-i - 1, min_op)
+ans = float('inf')
+for i in range(1,n-k+2):  # 范围拿草稿纸写一下证好了
+    broken_count = p[i+k-1] - p[i-1]
+    ans = min(broken_count, ans)
 
-print(min_op)
+print(ans)
