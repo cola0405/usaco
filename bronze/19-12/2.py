@@ -8,15 +8,15 @@ sys.stdin = open('whereami.in', 'r')
 sys.stdout = open('whereami.out', 'w')
 
 n = int(input())
-colors = input()
+mailbox = input()
 
-for k in range(1, n+1):
-    record = set()
-    for j in range(n-k+1):
-        mailboxes = colors[j:j+k]
-        if mailboxes in record:
+for k in range(1,n+1):
+    s = set()
+    for i in range(n-k+1):
+        sequence = mailbox[i:i+k]
+        if sequence in s:
             break
-        record.add(mailboxes)
+        s.add(sequence)
     else:
         print(k)
         break
