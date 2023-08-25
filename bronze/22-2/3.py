@@ -1,47 +1,20 @@
-# 0.0060002803802490234
-# 比3-1快了10倍
-
-
+# 难点在于选取block的顺序
+from itertools import permutations
 n = int(input())
-#import time
-#start = time.time()
+blocks = [input() for i in range(4)]
 
-cubes = []
-for i in range(4):
-    cubes.append(input())
+for _ in range(n):
+    word = input()
+    for selected_blocks in permutations(blocks, len(word)):  # 暴力尝试所有顺序
+        selected_blocks = list(selected_blocks)
+        for letter in word:
+            for block in selected_blocks:
+                if letter in block:
+                    selected_blocks.remove(block)
+                    break
 
-words = []
-ans = []
-for i in range(n):
-    words.append(input())
-    ans.append(0)
-
-
-def exist(word, blocks):
-    for i in word:
-        if i not in blocks:
-            return False
-        blocks.remove(i)
-    return True
-
-# build all combination
-all_combination = []
-for a in cubes[0]:
-    for b in cubes[1]:
-        for c in cubes[2]:
-            for d in cubes[3]:
-                cmb = [a,b,c,d]
-                all_combination.append(cmb)
-
-for cmb in all_combination:
-    for i in range(len(words)):
-        if exist(words[i], cmb):
-            ans[i] = 1
-
-for i in ans:
-    if i == 1:
-        print('YES')
-    else:
-        print('NO')
-
-#print(time.time() - start)
+            if len(selected_blocks) == 0:  # 被清空了则说明当前blocks序列可行
+                print('YES')
+                break
+            else:
+                print('NO')

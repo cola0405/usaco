@@ -12,33 +12,25 @@
 # ans：5
 
 import sys
-sys.stdin = open("herding.in", "r")
-sys.stdout = open("herding.out", "w")
+sys.stdin = open('herding.in', 'r')
+sys.stdout = open('herding.out', 'w')
 
-min_ans = 0
-max_ans = 0
+a,b,c = sorted(map(int, input().split()))
 
-loc = list(map(int, input().split()))
-loc.sort()
+gap1 = b-a
+gap2 = c-b
 
+max_op = max(gap1, gap2)-1
 
-
-max_gap0 = loc[2] - loc[0]
-max_gap1 = loc[2] - loc[1]
-min_gap1 = loc[1] - loc[0]
-min_gap2 = loc[2] - loc[0]
-
-if max_gap1 == 1 and max_gap0 == 2:
-    min_ans = 0
-elif max_gap1 == 2 \
-        or min_gap1 == 2:
-    min_ans = 1
+if gap1==1 and gap2==1:
+    min_op = 0
+elif gap1==2 or gap2==2:
+    min_op = 1
 else:
-    min_ans = 2
-max_ans = max(min_gap1, max_gap1) - 1
+    min_op = 2
 
-print(min_ans)
-print(max_ans)
+print(min_op)
+print(max_op)
 
 
 
