@@ -7,17 +7,16 @@ sys.stdin = open('cbarn.in', 'r')
 sys.stdout = open('cbarn.out', 'w')
 
 n = int(input())
-nums = []
-for i in range(n):
-    nums.append(int(input()))
+rooms = [int(input()) for _ in range(n)]
+total = sum(rooms)
 
 ans = float('inf')
 for i in range(n):
-    distance = 0
-    doors = 1
-    for j in range(i+1, n+i):
-        distance += nums[j%n]*doors
-        doors += 1
-    ans = min(ans, distance)
+    d = 0
+    cows = total
+    for j in range(i, i+n):
+        cows -= rooms[j%n]
+        d += cows
+    ans = min(ans, d)
 
 print(ans)
