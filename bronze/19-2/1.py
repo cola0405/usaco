@@ -16,18 +16,16 @@ sys.stdin = open('herding.in', 'r')
 sys.stdout = open('herding.out', 'w')
 
 a,b,c = sorted(map(int, input().split()))
-
-gap1 = b-a
-gap2 = c-b
-
-max_op = max(gap1, gap2)-1
-
-if gap1==1 and gap2==1:
+if a+1==b and b+1==c:
     min_op = 0
-elif gap1==2 or gap2==2:
+elif c-b==2 or b-a==2:
     min_op = 1
 else:
     min_op = 2
+
+gap1 = b-a
+gap2 = c-b
+max_op = max(gap1,gap2)-1
 
 print(min_op)
 print(max_op)

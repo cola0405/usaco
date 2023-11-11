@@ -1,50 +1,42 @@
-# 有序序列
-# no need to do the real swap
-# 模拟
-
 import sys
 sys.stdin = open('outofplace.in', 'r')
 sys.stdout = open('outofplace.out', 'w')
 
-GO_LEFT = 0
-GO_RIGHT = 1
-
-lst = []
 n = int(input())
-for i in range(n):
-    lst.append(int(input()))
+cows = [int(input()) for _ in range(n)]
 
-bessie_index = 0
-flag = GO_LEFT
+TO_LEFT = 0
+TO_RIGHT = 1
+flag = TO_LEFT
 
 # find bessie
-for i in range(len(lst)-1):
-    if lst[i] > lst[i+1]:
-        if i+2 >= len(lst):
-            bessie_index = i + 1
-            flag = GO_LEFT
-            break
-        if lst[i] > lst[i+2]:
-            bessie_index = i
-            flag = GO_RIGHT
-            break
-        elif lst[i] <= lst[i+2]:
-            bessie_index = i+1
-            flag = GO_LEFT
-            break
-
-
-s = set()
-if flag == GO_LEFT:
-    for i in range(bessie_index):
-        if lst[i] > lst[bessie_index]:
-            s.add(lst[i])
+i = 0
+if cows[0] > cows[1]:
+    i = 0
+    flag = TO_RIGHT
+elif cows[-1] < cows[-2]:
+    i = n-1
+    flag = TO_LEFT
 else:
-    for i in range(bessie_index, len(lst)):
-        if lst[i] < lst[bessie_index]:
-            s.add(lst[i])
+    for i in range(1, n-1):
+        if cows[i-1]<=cows[i+1]<cows[i]:
+            flag = TO_RIGHT
+            break
+        elif cows[i]<cows[i-1]<=cows[i+1]:
+            flag = TO_LEFT
+            break
 
+# calculate op
+bessie = cows[i]
+s = set()
+if flag == TO_RIGHT:
+    i += 1
+    while i<n and bessie > cows[i]:
+        s.add(cows[i])
+        i += 1
+else:
+    i -= 1
+    while i>=0 and bessie < cows[i]:
+        s.add(cows[i])
+        i -= 1
 print(len(s))
-
-
-
