@@ -1,17 +1,15 @@
+# 总共分三种情况
+# ①不传送
+# ②ax+by
+# ③ay+bx
+
 import sys
-sys.stdin = open("teleport.in","r")
-sys.stdout = open("teleport.out","w")
+sys.stdin = open('teleport.in','r')
+sys.stdout = open('teleport.out', 'w')
 
-start,end,t1,t2 = map(int, input().split())
+a,b,x,y = map(int, input().split())
+d1 = abs(a-b)
+d2 = abs(a-x) + abs(b-y)
+d3 = abs(a-y) + abs(b-x)
 
-# no teleport
-ans = abs(start - end)
-
-# go teleport
-way1 = abs(start - t1) + abs(end - t2)
-way2 = abs(start - t2) + abs(end - t1)
-
-ans = min(ans, way1, way2)
-print(ans)
-
-
+print(min(d1,d2,d3))

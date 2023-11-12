@@ -6,32 +6,17 @@
 # ps: guess should be after the swap
 
 import sys
-sys.stdin = open("shell.in", "r")
-sys.stdout = open("shell.out", "w")
+sys.stdin = open('shell.in', 'r')
+sys.stdout = open('shell.out', 'w')
 
-n = int(input())
-swap = []
-guess = []
-
-for i in range(n):
-    a, b, g = map(int, input().split())
-    swap.append((a-1, b-1))
-    guess.append(g-1)
-
-f = 0
-for i in range(3):
-    # 0:no pebble
-    # 1:has pebble
-    shell = [0, 0, 0]
-    shell[i] = 1
+def play(shell):
     count = 0
-    for j in range(n):
-        a, b = swap[j][0], swap[j][1]
-        g = guess[j]
+    for a,b,g in game:
         shell[a], shell[b] = shell[b], shell[a]
         if shell[g] == 1:
             count += 1
-    if count > f:
-        f = count
+    return count
 
-print(f)
+n = int(input())
+game = [list(map(int, input().split())) for i in range(n)]
+print(max(play([0,1,0,0]), play([0,0,1,0]), play([0,0,0,1])))

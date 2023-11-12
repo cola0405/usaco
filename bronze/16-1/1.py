@@ -1,16 +1,17 @@
+# g1 + s2g = g2 + g2p
+
 import sys
+sys.stdin = open('promote.in', 'r')
+sys.stdout = open('promote.out', 'w')
 
-sys.stdin = open("promote.in", "r")
-sys.stdout = open("promote.out", "w")
+b1, b2 = map(int, input().split())
+s1, s2 = map(int, input().split())
+g1, g2 = map(int, input().split())
+p1, p2 = map(int, input().split())
 
-bronze1, bronze2 = map(int, input().split())
-silver1, silver2 = map(int, input().split())
-gold1, gold2 = map(int, input().split())
-platinum1, platinum2 = map(int, input().split())
-
-g2p = platinum2 - platinum1
-s2g = gold2 - gold1 + g2p
-b2s = silver2 - silver1 + s2g
+g2p = p2 - p1
+s2g = g2p + g2 - g1
+b2s = s2g + s2 - s1
 
 print(b2s)
 print(s2g)

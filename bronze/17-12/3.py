@@ -3,42 +3,37 @@ sys.stdin = open("measurement.in", "r")
 sys.stdout = open("measurement.out", "w")
 
 n = int(input())
-log = []
-for i in range(n):
-    log.append(input().split())
-
-def by_day(item):
-    return int(item[0])
-log.sort(key=by_day)
-
-def update(oup):
-    cur_display = []
-    for name in milk_output:
-        if milk_output[name] == oup:
-            cur_display.append(name)
+logs = [input().split() for _ in range(n)]
+logs.sort(key=lambda item: int(item[0]))
 
 
-
-display = ["B","E","M"]
+display = ["Bessie","Elsie","Mildred"]
 cur_top = 7
 ans = 0
 milk_output = {"Bessie":7, "Elsie":7, "Mildred":7}
-for i in range(n):
-    name = log[1]
-    op = log[2][0]
-    num = int(log[2][1])
 
-    # update log
-    if op == '+':
-        milk_output[name] += num
-    else:
-        milk_output[name] -= num
+for log in logs:
+    name = log[1]
+    num = int(log[2])
+
+    # update output
+    milk_output[name] += num
 
     # update display
-    top = max(milk_output.values())
-    if top > cur_top:
+    cur_top = max(milk_output.values())
+    flag = 0
+
+    for name in milk_output.keys():
+        if milk_output[name] == cur_top and name not in display:
+            display.append(name)
+            flag = 1
+        elif milk_output[name] != cur_top and name in display:
+            display.remove(name)
+            flag = 1
+    if flag:
         ans += 1
-        cur_top = top
+
+print(ans)
 
 
 

@@ -1,27 +1,23 @@
-# 数组模拟
-
 import sys
 sys.stdin = open('lifeguards.in', 'r')
 sys.stdout = open('lifeguards.out', 'w')
 
 n = int(input())
-time = [0]*(1000+1)
+t = [0]*1001
 shifts = []
-for _ in range(n):
+for i in range(n):
     start, end = map(int, input().split())
+    for j in range(start, end):
+        t[j] += 1
     shifts.append((start, end))
-    for i in range(start, end):
-        time[i] += 1
 
 ans = 0
-for start, end in shifts:
-    for i in range(start, end):  # fire
-        time[i] -= 1
-
-    covered = len(time) - time.count(0)
-    ans = max(ans, covered)
-
-    for i in range(start, end):  # recover
-        time[i] += 1
+total = 1001 - t.count(0)
+for start,end in shifts:
+    x = total
+    for j in range(start, end):
+        if t[j] == 1:
+            x -= 1
+    ans = max(ans, x)
 
 print(ans)
