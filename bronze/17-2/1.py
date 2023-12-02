@@ -2,16 +2,15 @@ import sys
 sys.stdin = open("crossroad.in", "r")
 sys.stdout = open("crossroad.out", "w")
 
-record = [-1]*11
-n = int(input())
 ans = 0
+sides = dict()
+n = int(input())
 for i in range(n):
-    id, side = map(int, input().split())
-    if record[id] == -1:
-        record[id] = side
+    cow, side = map(int, input().split())
+    if cow not in sides:
+        sides[cow] = side
     else:
-        if record[id] != side:
-            ans += 1
-        record[id] = side
+        ans += side^sides[cow]
+        sides[cow] = side
 
 print(ans)
