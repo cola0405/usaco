@@ -1,4 +1,6 @@
 # find min2
+# 推荐 1_2 1_3
+# 1_4 是错误示范
 
 import sys
 sys.stdin = open("notlast.in", 'r')

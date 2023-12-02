@@ -13,12 +13,10 @@ for i in range(n):
     name, milk = line[0], int(line[1])
     count[name] += milk
 
-milks = sorted(count.values(), reverse=True)
-min_count = milks[-1]
-while len(milks) > 0 and milks[-1] == min_count:
-    milks.pop()
+milks = sorted(set(count.values()), reverse=True)
+milks.pop()
 
-if len(milks) == 0 or (len(milks) >= 2 and milks[-1] == milks[-2]):
+if len(milks) == 0 or list(count.values()).count(milks[-1]) > 1:
     print("Tie")
 else:
     for cow in count:

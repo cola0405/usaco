@@ -1,26 +1,27 @@
 # 不适用defaultdict
-
+# 未ac
 from collections import defaultdict
 import sys
 sys.stdin = open("notlast.in", 'r')
 sys.stdout = open("notlast.out", 'w')
 
-n = int(input())
 count = defaultdict(int)
+
+n = int(input())
 for i in range(n):
     line = input().split()
     name, milk = line[0], int(line[1])
     count[name] += milk
 
-cows = sorted(count, key=lambda item: count[item], reverse=True)
-min_count = min(count.values())
-while len(cows) > 0 and count[cows[-1]] == min_count:
-    cows.pop()
+milks = sorted(set(count.values()), reverse=True)
+milks.pop()
 
-if len(cows) == 0 or (len(cows) >= 2 and count[cows[-1]] == count[cows[-2]]):
+if len(milks) == 0 or list(count.values()).count(milks[-1]) > 1:
     print("Tie")
 else:
-    print(cows[-1])
+    for cow in count:
+        if count[cow] == milks[-1]:
+            print(cow)
 
 '''
 1
