@@ -1,12 +1,12 @@
 # 不适用defaultdict
+
+from collections import defaultdict
 import sys
 sys.stdin = open("notlast.in", 'r')
 sys.stdout = open("notlast.out", 'w')
 
-names = ["Bessie", "Elsie", "Daisy", "Gertie", "Annabelle", "Maggie", "Henrietta"]
-count = {name: 0 for name in names}
-
 n = int(input())
+count = defaultdict(int)
 for i in range(n):
     line = input().split()
     name, milk = line[0], int(line[1])
@@ -21,3 +21,8 @@ if len(cows) == 0 or (len(cows) >= 2 and count[cows[-1]] == count[cows[-2]]):
     print("Tie")
 else:
     print(cows[-1])
+
+'''
+1
+Bessie 1
+'''
