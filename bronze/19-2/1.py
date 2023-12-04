@@ -1,35 +1,19 @@
-# 题意需要注意一个规则：
-# 每次只能移动两端的cow，且只能把cow放到另外两头cows中间
-
-# min 比较简单，只能是0次，1次，2次（无论在何位置，最多两次就能放好）
-# max 滚刀肉
-# 测试用例：1 7 9
-# 1 6 7
-# 1 5 6
-# 1 4 5
-# 1 3 4
-# 1 2 3
-# ans：5
-
+# min 只有三种情况 0 1 2
+# max 就是 max_gap
 import sys
 sys.stdin = open('herding.in', 'r')
 sys.stdout = open('herding.out', 'w')
 
 a,b,c = sorted(map(int, input().split()))
-if a+1==b and b+1==c:
-    min_op = 0
-elif c-b==2 or b-a==2:
-    min_op = 1
+
+min_gap = min(b-a, c-b)-1
+max_gap = max(b-a, c-b)-1
+
+if max_gap == 0:
+    print(0)
+elif min_gap == 1 or max_gap == 1:
+    print(1)
 else:
-    min_op = 2
-
-gap1 = b-a
-gap2 = c-b
-max_op = max(gap1,gap2)-1
-
-print(min_op)
-print(max_op)
-
-
-
+    print(2)
+print(max_gap)
 
