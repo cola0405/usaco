@@ -5,6 +5,7 @@ sys.stdin = open('div7.in', 'r')
 sys.stdout = open('div7.out', 'w')
 n = int(input())
 
+# 同余
 # (p[j] - p[i - 1]) % 7 == 0
 # p[j] % 7 == p[i - 1] % 7
 # 问题转换为找 %7 余数相等的最大gap
