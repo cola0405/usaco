@@ -11,7 +11,7 @@ max_gap = max(b-a, c-b)-1
 
 if max_gap == 0:
     print(0)
-elif min_gap == 1 or max_gap == 1:
+elif min_gap == 1:
     print(1)
 else:
     print(2)

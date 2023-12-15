@@ -17,6 +17,5 @@ while i<n:
         i += 1
     if flag:
         ans += 1
-    else:
-        i += 1
+    i += 1
 print(ans)

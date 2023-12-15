@@ -1,7 +1,5 @@
 n = int(input())
-c = list(map(int, input().split()))
-
-c.sort()
+c = sorted(map(int, input().split()))
 
 ans = (0,0)
 for i in range(n):
