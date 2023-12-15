@@ -1,40 +1,19 @@
-# 枚举不出来的
-# 因为没办法通过遍历去进行淘汰
-
-# 题目看似是找正确的提问序列
-# 其实可以把问题进行转换
-# 找的其实是一对，最相似的一对1
-
-# 集合intersection
-
+# 问题转化为：如何使得每次提问排除的选项最少？
+# 想到贪心
+# 然后这里，也可以再转化一下解题角度
+# 说白了就是找相同特点最多的一对
+# 他们相同特点的数量+1就是答案 -- 能够坚持到最后
 
 import sys
 sys.stdin = open("guess.in", "r")
 sys.stdout = open("guess.out", "w")
 
-count = dict()
-animal_chas = dict()
 n = int(input())
+record = [set(input().split()[2:]) for _ in range(n)]
 
-for i in range(n):
-    line = input().split()
-    animal = line[0]
-    chas = line[2:]
-    animal_chas[animal] = set(chas)
+ans = 0
+for i in range(n):      # 双重循环找最相似的一对
+    for j in range(i+1, n):
+        ans = max(ans, len(record[i] & record[j]))  # intersection
 
-count = 0
-pair = ()
-for i in animal_chas:
-    for j in animal_chas:
-        if i == j:
-            continue
-        intersect_num = len(animal_chas[i] & animal_chas[j])
-        count = max(count, intersect_num)
-
-print(count+1)
-
-
-
-
-
-
+print(ans+1)
