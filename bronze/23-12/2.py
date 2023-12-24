@@ -1,39 +1,27 @@
-# 需要找到使得所有片段都成立的 night
-# 通过遍历交集来找
+# 看2_1.py 详细解释
 
-# 每个片段中可用的night
+# 贪心
+# 每个片段的 nights 是统一的
+# 那我们要找到一个所有片段都有效的nights，而且尽可能让nights更大（最小的最大值问题 -- 遍历更新即可）
+# 这样，最初始的病人数量就会尽可能得少
 
+from math import ceil
 n = int(input())
 s = input().split('0')
 
-res = set(range(n+1))   # 统计所有片段都可行的 night
+count = float('inf')   # 符合要求的天数
 for i in range(len(s)):
-    if len(s[i]) == 0:
-        continue
-
     l = len(s[i])
-    available = {0}     # 保底的night = 0
-    if i == 0 or i == l-1:
-        for night in range(1, l+1):
-            if 1+night > l:     # 边缘时最少可以每晚只+1
-                break
-            available.add(night)
+    if l == 0: continue
+
+    if i == 0 or i == len(s)-1:     # 边缘的增长方式比较特殊，每晚可以只+1
+        count = min(count, l-1)
     else:
-        for night in range(1,n):
-            if 1+night*2 > l:   # 普通情况下每晚+2
-                break
-            available.add(night)
-    res &= available    # 交集统计
+        count = min(count, (l-1)//2)  # 多少晚可以到l, -1是因为初始就有1个
 
 ans = 0
-night = max(res)    # night尽可能多，初始就可以尽可能少
-for seg in s:   # 统计每个片段最少的 sickness
+for seg in s:   # 统计每个片段最少的病人
     l = len(seg)
-    if l == 0:
-        continue
-
-    for x in range(1, l+1):
-        if x*(1+2*night) >= l:
-            ans += x
-            break
+    if len(seg) == 0: continue
+    ans += ceil(l/(1+2*count))   # 向上取整
 print(ans)
