@@ -1,38 +1,24 @@
 n = int(input())
 
-table = ["Ox", "Tiger", "Rabbit", "Dragon", "Snake","Horse",
-         "Goat", "Monkey", "Rooster", "Dog", "Pig", "Rat", "Ox"]
-year = {"Bessie": 2500}
-
-def get_animal(x):
-    gap = abs(x - year["Bessie"])
-    if x >= year["Bessie"]:
-        return table[gap%12]
-    else:
-        return table[12 - gap%12]
+year = {"Bessie": 12000}    # 足够大的year
+table = ["Ox", "Tiger", "Rabbit", "Dragon",
+            "Snake", "Horse", "Goat", "Monkey",
+            "Rooster", "Dog", "Pig", "Rat"]  # 表示到左边Ox的距离
 
 for i in range(n):
     info = input().split()
     name1, name2 = info[0], info[-1]
-    direction = info[3]
-    animal = info[4]
+    direction, animal = info[3], info[4]
+    cur = year[name2]
 
-    if direction == "previous":
-        direction = -1
-    else:
-        direction = 1
+    while True:
+        if direction == 'next':
+            cur += 1
+        else:
+            cur -= 1
+        if animal == table[cur%12]:     # 找到才停下
+            year[name1] = cur
+            break
 
-    cur = year[name2] + direction
-    while get_animal(cur) != animal:
-        cur += direction
-    year[name1] = cur
-
-print(abs(year["Bessie"] - year["Elsie"]))
-
-
-
-
-
-
-
+print(abs(year['Bessie'] - year['Elsie']))
 
