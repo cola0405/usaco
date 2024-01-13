@@ -3,14 +3,14 @@ cow = list(map(int, input().split()))
 candies = list(map(int, input().split()))
 
 for candy in candies:
-    low = 0
+    bottom = 0
     for i in range(n):
-        if cow[i] >= low:
-            gap = min(candy-low, cow[i]-low)
+        if cow[i] >= bottom:
+            gap = min(candy-bottom, cow[i]-bottom)    # 糖还有剩或被吃完
             cow[i] += gap
-            low += gap
+            bottom += gap
 
-        if low >= candy:
+        if bottom == candy:     # bottom 到顶 —— 糖果吃完了
             break
 
 for height in cow:
