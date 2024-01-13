@@ -1,5 +1,4 @@
 n = int(input())
-
 year = {"Bessie": 12000}    # 足够大的year
 table = ["Ox", "Tiger", "Rabbit", "Dragon",
             "Snake", "Horse", "Goat", "Monkey",
