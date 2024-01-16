@@ -1,20 +1,18 @@
-# 2s -> 469ms
-# 前面还是170ms 快不了多少
+# hash表优化list.index()
 
 import sys
 sys.stdin = open("cowroute.in", "r")
 sys.stdout = open("cowroute.out", "w")
 
 def build_index_table():
-    table = []
+    res = []
     for i in range(N):
         d = dict()
         cities = route_cities[i]
         for i in range(len(cities)):
             d[cities[i]] = i
-        table.append(d)
-    return table
-
+        res.append(d)
+    return res
 
 def one_route_check(i):
     if A not in table[i] or B not in table[i]:
@@ -48,7 +46,7 @@ for i in range(N):
     route_cities.append(cities)
     route_cost.append(cost)
 
-table = build_index_table()
+table = build_index_table()     # 优化index()
 min_cost = float("inf")
 
 # one route

@@ -1,11 +1,8 @@
 import sys
-
 sys.stdin = open('cowroute.in', 'r')
 sys.stdout = open('cowroute.out', 'w')
 
-
 A,B,N = map(int, input().split())
-
 ans = float('inf')
 for _ in range(N):
     cost, city_num = map(int, input().split())

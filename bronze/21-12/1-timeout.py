@@ -5,8 +5,6 @@ n = int(input())
 s = list(input())
 ans = 0
 
-cheat_sheet = []
-
 for i in range(n):
     g = 0
     h = 0
