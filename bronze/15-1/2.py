@@ -1,10 +1,10 @@
-import sys
+# 2-opt 效率最高
 
+import sys
 sys.stdin = open("cowroute.in", "r")
 sys.stdout = open("cowroute.out", "w")
 
 A,B,N = map(int, input().split())
-
 route_cities = []
 route_cost = []
 for i in range(N):
