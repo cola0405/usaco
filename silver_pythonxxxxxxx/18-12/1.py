@@ -32,5 +32,5 @@ def binSearch(low, high):
         return binSearch(mid+1,high)
 
 
-print(binSearch(0,int(1e9)))
+print(binSearch(0,time[-1]-time[0]))
 

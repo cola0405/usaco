@@ -7,17 +7,13 @@
 # 然后问题又转化为(N-1)x(N-1)最少需要多少次
 
 import sys
-
-
 sys.stdin = open("cowtip.in")
 sys.stdout = open("cowtip.out", 'w')
 
-
 def reverse(line, x, y):
-    for i in range(x):
-        for j in range(y):
+    for i in range(x+1):
+        for j in range(y+1):
             line[i][j] = not line[i][j]
-
 
 N = int(input())
 lines = []
@@ -29,6 +25,5 @@ for i in range(N)[::-1]:
     for j in range(N)[::-1]:
         if lines[i][j]:
             count += 1
-            reverse(lines, i + 1, j + 1)
-
+            reverse(lines, i, j)
 print(count)

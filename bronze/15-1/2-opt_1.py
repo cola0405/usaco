@@ -18,8 +18,8 @@ def build_inx():
 def two_route_check():
     if inx[first][A] == float('inf') or inx[second][B] == float('inf'):
         return False
-    for city in inx[first]:
-        if inx[first][city] > inx[first][A] and inx[second][city] < inx[second][B]:
+    for mid in inx[first]:
+        if inx[first][mid] > inx[first][A] and inx[second][mid] < inx[second][B]:
             return True
     return False
 
