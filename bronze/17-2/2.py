@@ -1,36 +1,25 @@
+# if a pair of cows(a,b) fit a_left < b_left < a_right < b_right
+# then ans += 1
+
 import sys
 sys.stdin = open("circlecross.in", "r")
 sys.stdout = open("circlecross.out", "w")
 
 log = input()
-
-def get_index(target):
-    inx = []
-    for i in range(len(log)):
-        if log[i] == target:
-            inx.append(i)
-    return inx[0], inx[1]
-
-alphabet = []
-path = dict()
-for i in range(26):
-    letter = chr(65+i)
-    inx1, inx2 = get_index(letter)
-    path[letter] = (inx1, inx2)
-    alphabet.append(letter)
+alphabet = [chr(i) for i in range(65,91)]
+inx = {chr(i): [] for i in range(65,91)}
+for i in range(52):
+    inx[log[i]].append(i)
 
 ans = 0
-for i in range(26):
+for i in range(26):     # permutation
     for j in range(26):
-        letter1 = alphabet[i]
-        letter2 = alphabet[j]
+        a = alphabet[i]
+        b = alphabet[j]
 
-        inx1, inx2 = path[letter1]
-        inx3, inx4 = path[letter2]
+        a_left, a_right = inx[a]
+        b_left, b_right = inx[b]
 
-        if inx1 < inx3 < inx2 < inx4:
+        if a_left < b_left < a_right < b_right:
             ans += 1
-
 print(ans)
-
-
