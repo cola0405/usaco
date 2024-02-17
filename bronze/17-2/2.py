@@ -20,6 +20,6 @@ for i in range(26):     # permutation
         a_left, a_right = inx[a]
         b_left, b_right = inx[b]
 
-        if a_left < b_left < a_right < b_right:
+        if a_left < b_left < a_right < b_right:     # avoid repeat
             ans += 1
 print(ans)
