@@ -1,4 +1,7 @@
 # 2D geometry
+# 熟练运用交集的几何知识
+
+# consider of this situation
 #    ******
 #    *    *
 # *************
@@ -23,13 +26,3 @@ ans = (by-ay) * (bx-ax)
 if (min_top < by and max_bottom > ay) \
             or (min_right < bx and max_left > ax):
     pass
-
-# 相交
-elif min_top > max_bottom and min_right > max_left:
-    dy = min_top - max_bottom
-    dx = min_right - max_left
-    # 需要减去相交部分
-    if dy == (by-ay) or dx == (bx-ax):
-        ans -= dx*dy
-
-print(ans)
