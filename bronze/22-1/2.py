@@ -1,5 +1,6 @@
 def win(d1, d2):
-    w,l = 0,0  # 模拟所有对局情况 -- 如果赢得多则X more likely win Y
+    # 模拟所有对局情况 -- 如果赢的多则 d1 more likely win d2
+    w,l = 0,0       
     for num1 in d1:
         for num2 in d2:
             if num1 > num2:
@@ -10,19 +11,17 @@ def win(d1, d2):
 
 def solve():
     line = list(map(int, input().split()))
-    a_die = line[:4]
-    b_die = line[4:]
-    for a in range(1, 11):      # 模拟c_dice的所有情况
-        for b in range(1, 11):
-            for c in range(1, 11):
-                for d in range(1, 11):
-                    c_die = (a, b, c, d)
+    a = line[:4]
+    b = line[4:]
+    for c1 in range(1, 11):      # 模拟c_dice的所有情况
+        for c2 in range(1, 11):
+            for c3 in range(1, 11):
+                for c4 in range(1, 11):
+                    c = (c1, c2, c3, c4)
 
-                    # 检查可行的情况
-                    if win(a_die, b_die) and win(b_die, c_die) and win(c_die, a_die):
-                        print('yes')
-                        return
-                    if win(b_die, a_die) and win(a_die, c_die) and win(c_die, b_die):
+                    # 检查是否为 Non-Transitive Dice
+                    if (win(a, b) and win(b, c) and win(c, a))\
+                        or (win(b, a) and win(a, c) and win(c, b)):
                         print('yes')
                         return
     print('no')

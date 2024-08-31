@@ -39,3 +39,5 @@ for _ in range(t):
         print("OK")
     else:
         print("LIE")
+
+

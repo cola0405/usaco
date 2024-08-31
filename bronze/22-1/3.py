@@ -1,49 +1,46 @@
-# 找到final line 这题就结束了
+# analyse
 
-# 保持每队i和i+1一致的前提下，不断贪心去压
-# 一旦发现无法维持i和i+1一致，则输出-1
+# 题意：
+# 给定一个列表，每次可以把相邻两个元素减1，问经过多少次操作后，列表内各元素相等
 
-round = int(input())
-ans = 0
-for r in range(round):
+# 通过手推，会发现我们会关注相邻的三个元素
+# 选择某两个元素来减，使得中间元素和第三个元素相等
+# 然后再调整中间元素和第三个元素，使这三个元素相等
+
+# ps：大体思路是这样，但是会存在不可调整的情况，这时就返回-1
+
+t = int(input())
+for _ in range(t):
     n = int(input())
-    levels = list(map(int, input().split()))
-    record = tuple(levels)
-    i = 0
-    while i < n-1:
-        if levels[i] < 0:
+    h = list(map(int, input().split()))
+    ans = 0
+    for i in range(1, n-1):
+        if h[i] > h[i+1]:
+            gap = h[i] - h[i+1]
+            h[i] -= gap
+            h[i-1] -= gap
+            ans += 2*gap
+        if h[i] > h[i-1]:
+            gap = h[i] - h[i-1]
+            h[i] -= gap
+            h[i+1] -= gap
+            ans += 2*gap
+
+    for i in range(1, n-1)[::-1]:   # 还需要反着来一遍，参考测试用例：10 8 6
+        if h[i] > h[i+1]:
+            gap = h[i] - h[i+1]
+            h[i] -= gap
+            h[i-1] -= gap
+            ans += 2*gap
+        if h[i] > h[i-1]:
+            gap = h[i] - h[i-1]
+            h[i] -= gap
+            h[i+1] -= gap
+            ans += 2*gap
+
+    for i in range(n-1):
+        if h[i] != h[i+1] or h[i] < 0:
+            print(-1)
             break
-        if levels[i] > levels[i+1]:
-            # i%2==0 说明i项前刚好有n对
-            # 又i项>i+1项，说明i和i-1项需要减了
-            # 但是如果i-1正好是一对中的right
-            # 那么就打破了一对的平衡，也就意味着g了，输出-1
-            if i%2 == 0:
-                break
-            levels[i] = levels[i+1]
-        elif levels[i] < levels[i+1]:
-            # i+1项大， 就需要i+2压下来
-            # 如果没有i+2，则意味着压不了，也g了，输出-1
-            if i+2 >= n:
-                break
-            diff = levels[i+1] - levels[i]
-            levels[i+2] -= diff
-            levels[i+1] = levels[i]
-            if levels[i+2] < 0:
-                break
-        i += 1
     else:
-        # find the final line
-        v = levels[n - 1]
-        ans = 0
-        for level in record:
-            ans += level - v
         print(ans)
-        continue
-    print(-1)
-
-
-
-
-
-

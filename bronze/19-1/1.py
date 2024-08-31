@@ -1,10 +1,3 @@
-# 抱怨是没有用的
-# 只有根据测试用例去推导题目的意思
-
-# 顺序没关系的
-
-# ps: guess should be after the swap
-
 import sys
 sys.stdin = open('shell.in', 'r')
 sys.stdout = open('shell.out', 'w')

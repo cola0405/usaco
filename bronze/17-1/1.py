@@ -1,4 +1,5 @@
 # 不适用defaultdict
+
 import sys
 sys.stdin = open("notlast.in", 'r')
 sys.stdout = open("notlast.out", 'w')
@@ -12,12 +13,12 @@ for i in range(n):
     name, milk = line[0], int(line[1])
     count[name] += milk
 
-cows = sorted(count, key=lambda item: count[item], reverse=True)
-min_count = min(count.values())
-while len(cows) > 0 and count[cows[-1]] == min_count:
-    cows.pop()
+values = list(count.values())
+milks = sorted(set(values), reverse=True)
 
-if len(cows) == 0 or (len(cows) >= 2 and count[cows[-1]] == count[cows[-2]]):
+if len(milks) == 1 or values.count(milks[-2]) > 1:
     print("Tie")
 else:
-    print(cows[-1])
+    for cow in count:
+        if count[cow] == milks[-1]:
+            print(cow)

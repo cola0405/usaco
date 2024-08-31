@@ -1,22 +1,17 @@
-# set 完美解决remove耗时的问题
-
+# two pointers
+# use Set to optimize the remove operation
 
 n = int(input())
-origin = list(map(int, input().split()))
-goal = list(map(int, input().split()))
+a = list(map(int, input().split()))
+b = list(map(int, input().split()))
 
-ans = 0
 i = 0
-j = 0
-abandon = set()
-while j < n:
-    if origin[i] in abandon:
+s = set()
+for j in range(n):       # j is the index for b
+    while a[i] in s:     # check a[i] is removed or not
+        i += 1  
+    if a[i] == b[j]:
         i += 1
-        continue
-    if origin[i] != goal[j]:
-        ans += 1
-        abandon.add(goal[j])
     else:
-        i += 1
-    j += 1
-print(ans)
+        s.add(b[j])
+print(len(s))

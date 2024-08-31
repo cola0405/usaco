@@ -9,14 +9,9 @@ signal = []
 for i in range(n):
     signal.append(input())
 
-ans = []
 for line in signal:
     temp = ''
     for c in line:
         temp += c*k
-
     for i in range(k):
         print(temp)
-
-for i in ans:
-    print(i)

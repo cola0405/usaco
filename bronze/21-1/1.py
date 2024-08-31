@@ -1,14 +1,13 @@
 table = input()
-target = input()
+word = input()
 
 ans = 0
-heard = 0
-while heard < len(target):
-    for i in table:
-        if heard < len(target) and target[heard] == i:
-            heard += 1
+i = 0
+while i < len(word):
+    for c in table:
+        if i < len(word) and word[i] == c:
+            i += 1
     ans += 1
-
 print(ans)
 
 

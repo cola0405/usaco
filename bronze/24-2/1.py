@@ -6,3 +6,4 @@ for r in range(t):
         print('E')
     else:
         print('B')
+

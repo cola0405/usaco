@@ -1,58 +1,33 @@
-# 不是什么操作都能合并在一个for循环里的
-# ps： 一定要先for处理green之后，才处理yellow
-# 不然会鹊占鸠巢
+# 题意理解
 
-# 阅读理解
-# 品种正确，但是在错误的位置
-# 要注意的是，正确的品种是有数量限制的
+# 给定两个字符串 a 和 b
+# 若 a[i] == b[i] 则标记为绿色
+# 若 a[i] != b[i] 但 b[i] 有在 a 中其他位置出现，则标记为黄色
+# 表示猜中了品种，但是猜错了位置
+# 最后输出绿色和黄色的数量
 
-ans = ""
-for i in range(3):
-    ans += input()
+# 🌟🌟🌟 要注意的是 🌟🌟🌟
+# 对与某一品种的牛，其黄色的数量 <= (字符串 a 中该品种牛的数量 – 绿色的数量)
 
-guess = ""
-for i in range(3):
-    guess += input()
+from collections import Counter
+a = "".join([input() for _ in range(3)])
+b = "".join([input() for _ in range(3)])
 
+cnt = Counter(a)
 green = 0
 yellow = 0
 
-ansBreeds = set(ans)
-guessBreeds = set(guess)
-
-interact = ansBreeds.intersection(guessBreeds)
-# ans中各品种的总数量
-d = {}
-
-# 在ans中寻找各品种的总数量
-for i in range(len(ans)):
-    if ans[i] in interact:
-        if ans[i] in d.keys():
-            d[ans[i]] += 1
-        else:
-            d[ans[i]] = 1
-
-# 统计green
-# ps： 一定要先for处理green之后，才处理yellow
-# 不然会鹊占鸠巢
-for i in range(len(guess)):
-    if guess[i] == ans[i]:
+# 统计绿色
+for i in range(9):
+    if a[i] == b[i]:
         green += 1
-        # 剩余品种正确的个数
-        d[guess[i]] -= 1
+        cnt[a[i]] -= 1      # 总数 - 绿色的数量，即为黄色的最大数量
 
-# 统计yellow
-for i in range(len(guess)):
-    # 品种正确，但是在错误的位置
-    # 要注意的是，正确的品种是有数量限制的
-    if guess[i] != ans[i] \
-            and guess[i] in interact \
-            and d[guess[i]] > 0:
+# 统计黄色
+for i in range(9):
+    if b[i] != a[i] and cnt[b[i]] > 0:
         yellow += 1
-        # 剩余品种正确的个数
-        d[guess[i]] -= 1
+        cnt[b[i]] -= 1
 
 print(green)
 print(yellow)
-
-
