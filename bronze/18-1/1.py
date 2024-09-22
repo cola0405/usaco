@@ -22,7 +22,10 @@ max_bottom = max(ay,cy)
 max_left = max(ax,cx)
 ans = (by-ay) * (bx-ax)
 
-# 仍然需要覆盖整个板
-if (min_top < by and max_bottom > ay) \
-            or (min_right < bx and max_left > ax):
-    pass
+# cover 2 edges
+if (min_top == by or max_bottom == ay) and (min_right == bx or max_left == ax):
+    h = min_top - max_bottom
+    w = min_right - max_left
+    if h == by-ay or w == bx-ax:    # all cover
+        ans -= w*h
+print(ans)

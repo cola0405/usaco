@@ -1,22 +1,19 @@
 # cw的对于的cw拐一定更多
 # 因为ccw干扰的，它都得拐回去
 
-cw = ['ES', 'SW', 'WN', 'NE']
-ccw = ['WS', 'SE', 'EN', 'NW']
+CW = ['ES', 'SW', 'WN', 'NE']
+CCW = ['WS', 'SE', 'EN', 'NW']
 
 n = int(input())
-for i in range(n):
-    path = input()
-    index = 0
-    cw_count = 0
-    ccw_count = 0
-    while index < len(path)-1:
-        if path[index:index+2] in cw:
-            cw_count += 1
-        elif path[index:index+2] in ccw:
-            ccw_count += 1
-        index += 1
-    if cw_count > ccw_count:
+for _ in range(n):      # n testcase
+    s = input()
+    cw = ccw = 0
+    for i in range(len(s)-1):
+        if s[i:i+2] in CW:
+            cw += 1
+        elif s[i:i+2] in CCW:
+            ccw += 1
+    if cw > ccw:
         print('CW')
     else:
         print('CCW')
