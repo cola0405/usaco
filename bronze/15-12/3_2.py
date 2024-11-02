@@ -13,10 +13,10 @@ for _ in range(S):
     sick[p] = t
 
 people = defaultdict(set)  # 统计每个牛奶的饮用者
-count = defaultdict(set)
+count = defaultdict(set)   # 统计喝过可能有毒的牛奶的人
 for p,m,t in record:
     people[m].add(p)
-    if p in sick and t < sick[p]:  # 统计生病前喝过的牛奶
+    if p in sick and t < sick[p]:  # 统计生病"前"喝过的牛奶
         count[m].add(p)
 
 ans = 0

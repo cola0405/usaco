@@ -1,49 +1,62 @@
-# 遇到非-1的，往前更新状态
-# 最后统计必为breakout的作为min
-# max = min + missing
+# O(n)
+# from right to left
+# the key point is the positive number in the log
+# because the previous numbers must be in descending order
 
 import sys
 sys.stdin = open('taming.in', 'r')
 sys.stdout = open('taming.out', 'w')
 
-NO_BREAKOUT = -2
-BREAKOUT = 0
-MISSING = -1
+def solve():
+    n = int(input())
+    log = list(map(int, input().split()))
+    if log[0] > 0:
+        print(-1)
+        return
 
-n = int(input())
-log = list(map(int, input().split()))
+    i = n-1
+    while i >= 0:           # from right to left
+        if log[i] > 0:      # meet with positive numbers
+            r = log[i]
+            while i >= 0 and r >= 0:        # update the previous numbers
+                if log[i] != r and log[i] != -1:
+                    print(-1)
+                    return
+                log[i] = r      # update the missing log
+                r -= 1
+                i -= 1
+        else: i -= 1
+    if log[0] == -1: log[0] = 0
+    min_b = log.count(0)
+    print(min_b, min_b + log.count(-1))     # in the end, the remaining -1 could become breakouts
 
-def update():
-    for i in range(n):
-        if log[i] != -1:
-            j = 0
-            days = log[i]
-            while j < days:
-                if log[i-j] == log[i] \
-                        or log[i-j] == MISSING:
-                    log[i - j] = NO_BREAKOUT
-                    j += 1
-                else:
-                    return False
-            log[i - j] = BREAKOUT
-    log[0] = BREAKOUT
-    return True
-
-
-if update():
-    # counting
-    min_ans = 0
-    max_ans = 0
-    for i in log:
-        if i == BREAKOUT:
-            min_ans += 1
-        elif i == MISSING:
-            max_ans += 1
-
-    max_ans += min_ans
-    print(min_ans, max_ans)
-
-else:
-    print(-1)
+solve()
 
 
+
+
+
+
+
+'''
+4
+-1 -1 -1 -1
+
+1 4
+
+5
+0 -1 -1 -1 2
+
+2 3
+
+5
+0 -1 1 -1 2
+
+-1
+
+5
+0 1 2 -1 0
+
+2 3
+
+'''
