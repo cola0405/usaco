@@ -34,7 +34,7 @@ for i in range(2*n):
     blocked = False
     if pair_id in d:
         # check whether inside
-        for k in d:
+        for k in d:             # it will be ok if the left is the first endpoint
             if k != pair_id:
                 blocked = True
             break
