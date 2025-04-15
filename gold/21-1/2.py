@@ -1,66 +1,54 @@
 '''
-12 23 35 54
-1 2 3 2 5 3 4
+分层图 + bfs最短路
 
-最优解: 1 -> 2 -> 3 -> 5 -> 4
-可以证明不是单纯看最右
-单纯看最左也不行，考虑此测试用例: 1 5 2 3 2 5 3 4
-(选左边的5也不好使)
+题目大意：
+n头牛排成一排，每头牛的品种可能不一样，然后只有某些特定品种的牛之间才能够单向传递信息
+传递消息所需的时间是 |pos1-pos2|, 问信息从第一头牛传到第 n头牛最少需要花费多少时间
+
+解题思路：
+像这种一类若干个点，到另外一类若干个点的问题可以考虑分层图
+从另外一个角度看，如果是常规 bfs找最短路，时间复杂度 O(n^2) 过不了（对于某个节点x，都需要去看其他 n个节点）
+但是这道题牛的种类最大只有 50，用分层图的话 O(n*k) （总共就 n*k个节点要走）
+
+分层图的简介：
+在原图的基础上，额外建立 k层图，每个种类的牛做一层（但是注意，这些层是抽象构建出来的，不是只保存某个种类的点）
+分层图的 bfs过程和常规的图不同，如果种类不同的两个节点 i要走到节点 j
+首先节点 i跳到自己种类对应的层的 i位置（这一步不需要代价）
+然后再走到 j位置（这个是需要代价的），再从该层跳回原图
+不同层之间切换不需要代价，因为这些层其实是我们抽象构建出来的，只有进行实际发生的移动才有代价
+
+基于上面的情况，如果要基于分层图求最短路，则从节点 1走一个 bfs即可（bfs过程中会往各层去），每次走一格
 
 '''
 
-from collections import defaultdict, deque
+
+
+from collections import deque
+def update(u,v,w):      # 更新 dis数组、维护队列，参数：从 u到 v的代价是 w
+    if dis[v] != -1:        # bfs 找最短路，搜到时就是最短路
+        return
+    if w == 0:              # 代价为 0时，表示去往不同层
+        q.appendleft(v)     # 这里进行优先处理是为了避免错过最优路径，分层图 bfs和常规 bfs不一样
+        dis[v] = dis[u]     # 这里存在权值为 0的边，如果默认把当前这一项放到队尾
+    else:                   # 则 bfs可能会走更远的路搜索，解决方法是逮到这个权值为 0的就放到队首优先处理
+        q.append(v)
+        dis[v] = dis[u] + 1
+
 n,k = map(int, input().split())
 b = list(map(int, input().split()))
 S = [[int(c) for c in input()] for _ in range(k)]
-
-d = defaultdict(list)       # record the index of each breed
-for i in range(n): d[b[i]].append(i)
-
-dis = [1e9 for _ in range(n)]
+dis = [-1] * (n*(k+1))      # dis[i] 表示到达 i 的最短路径长度 (0, n-1)表示原图，而后(n, 2n-1), (2n, 3n-2), ... 表示对应 k个层
 dis[0] = 0
-q = deque([b[0]])  # index of the node
-vis = [0] * (k+1)
+q = deque([0])
 while q:
-    b1 = q.popleft()    # we are going to figure out the optimal way from b1 to b2
-    if vis[b1]: continue
-    vis[b1] = 1
-    for nxt in range(k):
-        if S[b1-1][nxt]:    # to fit the 0-index
-            b2 = nxt+1
-            # two pointers try the pairs to update dis[b2], O(n) -- every group of cow will only check once
-            flag = 0
-            u,v = 0,0
-            while u < len(d[b1]) and v < len(d[b2]):
-                if dis[d[b1][u]] + abs(d[b1][u]-d[b2][v]) < dis[d[b2][v]]:
-                    dis[d[b2][v]] = dis[d[b1][u]] + abs(d[b1][u]-d[b2][v])
-                    flag = 1
-                if u == len(d[b1]) or d[b1][u] > d[b2][v]: v += 1
-                else: u += 1
-            if flag: q.append(b2)
-print(dis[-1])
-                
-'''
-4 3
-1 3 2 1
-010
-011
-111
-
-ans: 5
-
-8 8
-1 2 3 4 5 6 7 8
-01000010
-00100000
-00010000
-00001000
-00000100
-00000001
-00000100
-00000000
-
-ans: 7
-
-
-'''
+    x = q.popleft()
+    if x < n:               # 在原图
+        update(x, b[x]*n + x, 0)
+    else:
+        layer = x//n        # 看当前 x是在第几层
+        pos = x%n           # 看 x是在第几层第几个位置
+        if pos > 0: update(x, x-1, 1)       # 往左走
+        if pos < n-1: update(x, x+1, 1)     # 往右走
+        # -1 for offset
+        if S[layer-1][b[pos]-1]: update(x, pos, 0)      # 往当前位置对应的层 bfs
+print(dis[n-1])
